@@ -18,18 +18,25 @@ Requirements:
 On Debian and Ubuntu:
 
 >```
-># apt-get install python-sphinx texlive texlive-latex-extra libalgorithm-diff-perl \
+># apt-get install python3-sphinx texlive texlive-latex-extra libalgorithm-diff-perl \
 >                  texlive-humanities texlive-generic-recommended graphviz \
 >                  texlive-generic-extra
 >```
 >
->If the version of python-sphinx installed is too old, then an additional
+>If the version of python3-sphinx installed is too old, then an additional
 >new version can be installed with the Python package installer:
 >
 >```
->$ apt-get install python-pip
->$ pip install --user --upgrade Sphinx
+>$ apt-get install python3-pip
+>$ pip3 install --user --upgrade Sphinx
 >$ export SPHINXBUILD=~/.local/bin/sphinx-build
+>```
+>
+>Since it is currently using Sphinx Furo theme for the doc interface,
+>install Furo with:
+>
+>```
+>$ pip3 install furo
 >```
 >
 >You will need latexdiff v1.2.1 or later to create the changebars PDF version
@@ -42,21 +49,28 @@ On Debian and Ubuntu:
 >$ export PATH=$PWD/latexdiff/:$PATH
 >```
 >
->Export SPHINXBUILD (see above) if Sphinx was installed with pip --user, then follow Make commands below
+>Export SPHINXBUILD (see above) if Sphinx was installed with pip3 --user, then follow Make commands below
 
 On Mac OS X:
 
 > Install [MacTeX](http://tug.org/mactex/)
 >
-> Install pip if you do not have it:
+> Install pip3 using [brew](http://brew.sh) if you do not have it:
 >```
->$ sudo easy_install pip
+>$ brew install python3
 >```
 >Install Sphinx
 >```
->pip install --user --upgrade Sphinx
+>pip3 install --user --upgrade Sphinx
 >Or
->sudo pip install --upgrade Sphinx
+>sudo pip3 install --upgrade Sphinx
+>```
+>
+>Since it is currently using Sphinx Furo theme for the doc interface,
+>install Furo with:
+>
+>```
+>$ pip3 install furo
 >```
 >
 >If you are using [brew](http://brew.sh) then you can install graphviz like this:
@@ -91,7 +105,7 @@ to you under the Apache License, Version 2.0.
 
 ## Copyright ##
 
-Copyright 2021 Intel Corporation
+Copyright 2021 Intel Corporation  
 Copyright 2023 9elements GmbH
 
 THIS SPECIFICATION IS PROVIDED "AS IS" WITH NO WARRANTIES WHATSOEVER, 
@@ -102,10 +116,10 @@ ANY PROPOSAL, SPECIFICATION OR SAMPLE.
 Questions pertaining to this document, or the terms or conditions of its
 provision, should be addressed to:
 
-9elements GmbH
-Kortumstraße 19-21
-44787 Bochum
-Germany
+9elements GmbH  
+Kortumstraße 19-21  
+44787 Bochum  
+Germany  
 Attn: Universal Payload Workgroup
 
 ## Contributions ##
