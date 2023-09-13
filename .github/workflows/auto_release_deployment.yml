@@ -47,7 +47,7 @@ jobs:
     - name: build pdf
       run: |
         make latexpdf
-        mv build/latex/upl-specification.pdf build/latex/upl-specification-$(git describe).pdf
+        mv _build/latex/upl-specification.pdf _build/latex/upl-specification-$(git describe).pdf
     - name: build html
       run: make html
     - name: build singlehtml
@@ -58,18 +58,18 @@ jobs:
       with:
         name: artifacts
         path: |
-          build/latex/upl-specification-*.pdf
+          _build/latex/upl-specification-*.pdf
 
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/singlehtml
+        publish_dir: ./_build/singlehtml
 
     - name: release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: build/latex/upl-specification-*.pdf
+        files: _build/latex/upl-specification-*.pdf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
