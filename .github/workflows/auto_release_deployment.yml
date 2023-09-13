@@ -1,0 +1,63 @@
+name: Deploy auto releases
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+# Cancel any in-progress job or run
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: install
+      run: |
+        sudo apt-get update
+        sudo apt-get install latexmk libalgorithm-diff-perl texlive texlive-latex-extra texlive-humanities graphviz
+        pip3 install --user mako
+        pip3 install --user furo
+        pip3 install --user typing
+        pip3 install --user Sphinx
+        pip3 install --user codespell
+        git fetch --tags --force # Needed to make git-describe work
+
+    - name: build pdf
+      run: |
+        make latexpdf
+        mv build/latex/upl-specification.pdf build/latex/upl-specification-$(git describe).pdf
+    - name: build html
+      run: make html
+    - name: build singlehtml
+      run: make singlehtml
+
+    - name: upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifacts
+        path: |
+          build/latex/upl-specification-*.pdf
+
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/singlehtml
+
+    - name: release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: build/latex/upl-specification-*.pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
