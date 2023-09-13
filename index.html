@@ -1,0 +1,1494 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <link rel="shortcut icon" href="_static/upl-favicon.png"/><!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
+        <title>Universal Payload Specification v0.8-1-g11abc3d documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">Universal Payload Specification</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/upl-logo.svg" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">Universal Payload Specification</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-revhistory">Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-references">References &amp; Terminology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-chapter1-introduction">Chapter 1: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-chapter2-payload-image-format">Chapter 2: Payload Image Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-chapter3-payload-handoff-state">Chapter 3: Payload Handoff State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-chapter4-payload-handoff-format">Chapter 4: Payload Handoff Format</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="spec-fullname-specversion">
+<h1>UPL Specification v0.8-1-g11abc3d<a class="headerlink" href="#spec-fullname-specversion" title="Link to this heading">#</a></h1>
+<p><strong>Scope</strong></p>
+<p>This document defines technical specifications for a Universal Payload to be
+used as a common payload handoff interface in between Platform Init and Payload.</p>
+<div class="toctree-wrapper compound">
+<span id="document-license"></span><section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<section id="license-information">
+<h3>License Information<a class="headerlink" href="#license-information" title="Link to this heading">#</a></h3>
+<p>The content of this Universal Payload (UPL) Specification is licensed under the
+Creative Commons Attribution 4.0 International License. It is attributed to The
+Universal Payload Project Team, the original version can be found <a class="reference external" href="https://github.com/UniversalScalableFirmware/documentation/blob/b8ab9a4d873fc37b5095382f52557a7613db60b0/source/2_universal_payload.rst#L21">here</a>.
+You may obtain a copy of the License at
+<a class="reference external" href="http://creativecommons.org/licenses/by/4.0/">http://creativecommons.org/licenses/by/4.0/</a></p>
+<p>Unless stated otherwise, the sample code examples in this document are released
+to you under the Apache License, Version 2.0.</p>
+<p>* Other names and brands may be claimed as the property of others.</p>
+</section>
+<section id="copyright">
+<h3>Copyright<a class="headerlink" href="#copyright" title="Link to this heading">#</a></h3>
+<div class="line-block">
+<div class="line">Copyright 2021 Intel Corporation</div>
+<div class="line">Copyright 2023 9elements GmbH</div>
+</div>
+<p>THIS SPECIFICATION IS PROVIDED “AS IS” WITH NO WARRANTIES WHATSOEVER,
+INCLUDING ANY WARRANTY OF MERCHANTABILITY, NONINFRINGEMENT, FITNESS
+FOR ANY PARTICULAR PURPOSE, OR ANY WARRANTY OTHERWISE ARISING OUT OF
+ANY PROPOSAL, SPECIFICATION OR SAMPLE.</p>
+<p>Questions pertaining to this document, or the terms or conditions of its
+provision, should be addressed to:</p>
+<div class="line-block">
+<div class="line">9elements GmbH</div>
+<div class="line">Kortumstraße 19-21</div>
+<div class="line">44787 Bochum</div>
+<div class="line">Germany</div>
+<div class="line">Attn: Universal Payload Workgroup</div>
+</div>
+</section>
+</section>
+<span id="document-acknowledgements"></span><section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h2>
+<p>The Universal Payload Workgroup acknowledges the following individuals for their
+contributions to this specification:</p>
+<p><strong>CONTRIBUTORS:</strong></p>
+<ul class="simple">
+<li><p>Aaron Durbin (Rivos)</p></li>
+<li><p>Benny Lin (Intel)</p></li>
+<li><p>Chasel Chiu (Intel)</p></li>
+<li><p>Dhaval Sharma (Rivos)</p></li>
+<li><p>Dong Guo (Intel)</p></li>
+<li><p>Dong Wei (ByteDance)</p></li>
+<li><p>Gua Guo (Intel)</p></li>
+<li><p>James Lu (Intel)</p></li>
+<li><p>Jose Marinho (Arm)</p></li>
+<li><p>Lean Sheng Tan (9elements)</p></li>
+<li><p>Maximilian Brune (9elements)</p></li>
+<li><p>Ron Minnich (Samsung)</p></li>
+<li><p>Samer Mahmoud (Arm)</p></li>
+<li><p>Simon Glass (Google)</p></li>
+<li><p>Vincent Zimmer (Intel)</p></li>
+<li><p>Werner Zeh (Siemens)</p></li>
+<li><p>Yunhui Cui (ByteDance)</p></li>
+<li><p>Zhiguang Liu (Intel)</p></li>
+</ul>
+</section>
+<span id="document-revhistory"></span><section id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Link to this heading">#</a></h2>
+<div class="table-wrapper docutils container" id="id2">
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Revision History</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Revision</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.8</p></td>
+<td><p>2023-AUG-28</p></td>
+<td><p>Initial pre-release version with basic document
+framework. These sections have been published:</p>
+<ul class="simple">
+<li><p>Acknowledgments</p></li>
+<li><p>License</p></li>
+<li><p>References</p></li>
+<li><p>Chapter 1: Introduction</p></li>
+<li><p>Chapter 2: Payload Image Format</p></li>
+<li><p>Chapter 3: Payload Handoff State</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<span id="document-references"></span><section id="references-terminology">
+<h2>References &amp; Terminology<a class="headerlink" href="#references-terminology" title="Link to this heading">#</a></h2>
+<section id="abbreviation">
+<h3>Abbreviation<a class="headerlink" href="#abbreviation" title="Link to this heading">#</a></h3>
+<p>For the purposes of this document, the following abbreviations apply:</p>
+<blockquote>
+<div><div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Abbreviation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FIT</p></td>
+<td><p>Flat Image Tree</p></td>
+</tr>
+<tr class="row-odd"><td><p>FDT</p></td>
+<td><p>Flattened Device Tree</p></td>
+</tr>
+<tr class="row-even"><td><p>UPL</p></td>
+<td><p>Universal Payload</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+</section>
+<section id="terminology">
+<h3>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Platform Init</p></td>
+<td><p>Set up the hardware and memory, so that the
+Payload can interact with that hardware to
+prepare for an OS boot. For some projects
+this is referred to as bootloader.</p></td>
+<td><p>coreboot, EDK2, OpenSBI,
+oreboot, Slim Bootloader, U-Boot SPL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload</p></td>
+<td><p>As part of system firmware, it mainly
+initializes boot media and boots the OS.
+For some projects it is referred as OS
+Loader.</p></td>
+<td><p>EDK2, Grub, LILO, LinuxBoot, SeaBIOS,
+U-Boot</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<div role="list" class="citation-list">
+<div class="citation" id="dtspec" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DTspec<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/devicetree-org/devicetree-specification/releases/tag/v0.4">DeviceTree Specification Release v0.4</a></p>
+</div>
+<div class="citation" id="fitspec" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>FITspec<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/open-source-firmware/flat-image-tree/releases/tag/v0.8">Flat Image Tree Specification Release v0.8</a></p>
+</div>
+</div>
+</section>
+</section>
+<span id="document-chapter1-introduction"></span><section id="chapter-1-introduction">
+<span id="chapter-introduction"></span><h2>Chapter 1: Introduction<a class="headerlink" href="#chapter-1-introduction" title="Link to this heading">#</a></h2>
+<p><strong>Conventions Used in this Document</strong></p>
+<p>The word <em>shall</em> or <em>must</em> is used to indicate mandatory requirements strictly
+to be followed in order to conform to the standard and from which no deviation
+is permitted (<em>shall</em> or <em>must</em> equals <em>is required to</em>).</p>
+<p>The word <em>should</em> is used to indicate that among several possibilities one is
+recommended as particularly suitable, without mentioning or excluding others; or
+that a certain course of action is preferred but not necessarily required; or
+that (in the negative form) a certain course of action is deprecated but not
+prohibited (<em>should</em> equals <em>is recommended that</em>).</p>
+<p>The word <em>may</em> is used to indicate a course of action permissible within the
+limits of the standard (<em>may</em> equals <em>is permitted</em>).</p>
+<section id="purpose">
+<h3>1.1 Purpose<a class="headerlink" href="#purpose" title="Link to this heading">#</a></h3>
+<p>Most modern platforms rely on system firmware to initialize the hardware and
+launch an image (or commonly described as Operating System, “OS”). The system
+firmware is responsible for initializing the platform hardware including CPU and
+other silicon functional blocks, detecting and initializing the memory
+subsystem, boot media initialization and setting up hardware abstractions for
+use by the operating systems.</p>
+<p>For this standard, we divide booting into three abstractions, that run in
+sequence. The first supports the second, and supplies it with needed tables;
+the second supports the third, and will modify the tables, most commonly
+extending them. On some systems, such as an ARM SoC, there is code that will
+run before the platform initialization. We consider this code to be out of
+scope.</p>
+<p>Following common practice, we call these abstractions Platform Init, Payload,
+and OS. In many cases, these are entirely independent, and their only
+dependence is on the tables that are passed from one to the next.</p>
+<p>An example of this use, is a Chromebook or cellphone, in which Platform Init
+(called, variously, SPL or boot block) enables system memory and power; the
+Payload, loaded to system memory, locates and loads an OS; and the OS,
+once loaded, takes over the platform.</p>
+<p>In some cases, there is only one program, but that program has Platform Init,
+Payload, and OS, called in sequence. The model still works, because the
+operations needed are still the same. For example, a Tamago or tinygo program
+can start, unfold part of itself into system memory, configure the platform,
+and then enter the main() of the program.</p>
+<p>For notational convenience, and to avoid mental overload, we take the
+traditional view: Platform Init, Payload, and OS are separate, independent
+steps, their goal being to get the platform to a working state. Tables are
+passed from one step to the next, in memory, with the final consumer being the
+OS. We know of no case, from the simplest to the most complex, that can not
+be adequately described by this notational convenience. Awareness of the many
+variations is important, to avoid bad assumptions; but, awareness having been
+gained, we can proceed to think in convenient terms.</p>
+<p>It is common for either the Payload or the Platform Init to install persistent
+code in hidden memory that is invisible to the OS. We consider this runtime
+firmware out of scope.</p>
+<p>This specification describes an interface between the Platform Init phase that
+initializes the system hardware and the Payload phase. It includes how to format
+and pass parameters to the Payload, Payload image format, Payload boot mode and
+stack usage, register settings etc. The intent for this specification is to
+provide interoperability between spec-compliant Platform Init stage and spec
+compliant Payload stage. This can also allows Payloads to be distributed
+independently of the board firmware.</p>
+<figure class="align-center">
+<img alt="Universal Payload bootflow from Platfrom Init to OS" src="_images/upl-bootflow.png" />
+</figure>
+<section id="platform-init">
+<h4>1.1.1 Platform Init<a class="headerlink" href="#platform-init" title="Link to this heading">#</a></h4>
+<p>Platform Init is primarily responsible for initializing the system hardware
+including, but not limited to CPU initialization, memory detection and
+initialization, initialization of silicon functional units (IO controllers), bus
+topology configuration, etc. In addition to the initialization itself, Platform
+Init is responsible for providing the system configuration information to the
+subsequent stages in the boot process. In addition to proprietary options, there
+are several open sourced projects available which provide Platform Init
+functionality, For example: EDK-II, coreboot, U-Boot, openSBI, oreboot and Slim
+Bootloader.</p>
+</section>
+<section id="payload">
+<h4>1.1.2 Payload<a class="headerlink" href="#payload" title="Link to this heading">#</a></h4>
+<p>After initializing the system hardware, Platform Init launches Payload. Payloads
+ideally are modular and platform-independent. In order to achieve this
+independence, the interfaces used by Platform Init and Payload need to be
+described in an abstract way. This document aims to provide a specification for
+this abstraction.</p>
+<p>While OS boot protocol is one of the main functionality provided by Payloads,
+there could be other functionality such as diagnostics that can be enabled by
+Payloads.</p>
+<p>As mentioned earlier, while certain system-firmware implementations include both
+the initialization and OS boot logic in a single code base, the distinction
+lies in the functionality provided. This leads to use cases where some system
+firmware implementations can act as an Payload providing OS boot capability,
+while relying on an underlying Platform Init layer for system-hardware
+initialization.</p>
+<p>There are many Payloads currently available, including the EDK-II payload, that
+provide UEFI services, LinuxBoot, U-Boot, GRUB and other custom implementations.</p>
+</section>
+</section>
+<section id="design-goal">
+<h3>1.2 Design Goal<a class="headerlink" href="#design-goal" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Self-describing, in the sense that the names, types, length, and capacity of
+the elements are represented in the data itself, not in an external document
+or metadata.</p></li>
+<li><p>It does not need to be a text format (which might be expensive to parse) but
+should have tools to render it into one</p></li>
+<li><p>Not dependent on any single programming language</p></li>
+<li><p>Allow independent development and deployment of Platform Init and Payload
+meeting compatibility needs</p></li>
+<li><p>Small and simple footprints for fast boots</p></li>
+</ol>
+</section>
+<section id="security-requirements">
+<h3>1.3 Security Requirements<a class="headerlink" href="#security-requirements" title="Link to this heading">#</a></h3>
+<p>Payload is part of system firmware Trusted Computing Base (TCB).</p>
+<p>Today the Payload is provisioned as part of the platform initialization code. As
+such, Platform Init should own the signing and verification of Universal Payload
+binary as well as other binary (e.g., PXE rom, GOP binary). However, UPL binary
+can provide an extra layer of security by having its own signature.</p>
+</section>
+</section>
+<span id="document-chapter2-payload-image-format"></span><section id="chapter-2-payload-image-format">
+<span id="chapter-payload-image-format"></span><h2>Chapter 2: Payload Image Format<a class="headerlink" href="#chapter-2-payload-image-format" title="Link to this heading">#</a></h2>
+<p>The Payload, as a standalone component, needs to be properly loaded by Platform
+Init into memory prior to execution. In this loading process, additional
+processes might be required, such as assembling, rebasing, authenticating, etc.
+Today, many Payloads use their own image formats (PE, ELF, FV, RAW, etc.), and
+it is very challenging for a Platform Init to identify and support all of them.
+To address this, FIT (Flat Image Tree) is chosen as a common Payload image
+format to facilitate the loading process. Rather than using FIT as a container
+for PE or ELF images, this specification uses FIT with flat binary images.
+Platform Init does not need to worry about decoding PE, ELF, FV, etc.</p>
+<p>FIT <a class="reference internal" href="index.html#fitspec" id="id1"><span>[FITspec]</span></a> is a long-established format for packaging firmware, Linux
+kernels, ramdisks, devicetrees along with configuration / metadata. It is
+flexible enough to have been extended several times over the years, including
+secure boot, FPGAs, multiple loadable firmware images, external hashed binaries,
+etc.</p>
+<p>The file format is basically a devicetree, although often large binaries are
+‘external’ to the FIT with a pointer from the FIT itself.</p>
+<p>This format has many advantages:</p>
+<ul class="simple">
+<li><p>Easy to dump and read (fdtdump)</p></li>
+<li><p>Easy to parse, just a small layer on top of libfdt, which is itself a small
+library</p></li>
+<li><p>Can also be implemented independently, as with fwupd</p></li>
+<li><p>But still can be extended for more complex use cases</p></li>
+<li><p>Provides full signature checking</p></li>
+<li><p>FDT is widely used and understood in the industry (Linux, U-Boot, Zephyr)</p></li>
+<li><p>Can support formats other than ELF if we want to allow that for simpler use
+cases (e.g. flat binary at a fixed load address)</p></li>
+<li><p>Supports packaging multiple binaries. Certain platforms do need to load
+multiple binaries, so this provides a motivation for using FIT</p></li>
+</ul>
+<p>FIT has a lot of options. For the purposes of UPL a subset of FIT is supported.
+See the FIT Schema for full details.</p>
+<section id="fit-images">
+<h3>2.1 FIT Images<a class="headerlink" href="#fit-images" title="Link to this heading">#</a></h3>
+<p>An image is something which can be loaded into memory and executed. Where
+multiple images are loaded, only the first is executed; Platform Init loads the
+other images and provides information about where they were loaded to the
+executed image.</p>
+<p>Images have various metadata associated with them, such as a timestamp, machine
+architecture, project name and compression.</p>
+<p>Each image has its own node. Image nodes may use any name, but must not include
+‘&#64;’ characters. At least one image must be present. There is no upper limit to
+how many images may be present.</p>
+</section>
+<section id="fit-configurations">
+<h3>2.2 FIT Configurations<a class="headerlink" href="#fit-configurations" title="Link to this heading">#</a></h3>
+<p>A configuration is a collection of images for a given board or purpose. Each
+configuration specifies an executable “firmware” image and optional “loadable”
+images. All images are loaded before the “firmware” image is executed; and at
+least one configuration must be present. There is no upper limit to how many
+configurations may be present.</p>
+<p>The default configuration is specified by a “default” property in the
+/configuration node. Configuration nodes may use any name, but must not include
+‘&#64;’ characters. It is recommended that they be called “conf-1”, “conf-2”, etc.</p>
+<p>Where multiple configuration nodes are present, the “compatible” property is
+used by Platform Init to determine which configuration to use. This is a list of
+“vendor,model” strings in order from most specific (or desirable) to least. This
+may be used to support using the same FIT with many different boards, where
+Platform Init understands the concept of a compatible string and can make this
+determination.</p>
+<p>Where no compatible string matches, for any configuration, the FIT cannot be
+loaded and Platform Init should generate an error indicating that no
+configuration matches, along with information about what compatible string(s) it
+was looking for.</p>
+<p>Where no compatible strings are present, or Platform Init does not support this
+concept, the default configuration is used. In this case, there is no purpose to
+providing multiple images. Future revisions of this specification may use this
+to support configurations for different purposes, such as a recovery flow.</p>
+</section>
+<section id="fit-schema">
+<h3>2.3 FIT Schema<a class="headerlink" href="#fit-schema" title="Link to this heading">#</a></h3>
+<p>UPL conforms to the FIT schema but adds some additional requirements. These will
+be upstreamed to the FIT specification once finalized here.
+The structure is quite simple:</p>
+<ul class="simple">
+<li><p>The root node holds an “images” subnode and a “configurations” subnode. These
+subnodes have no properties.</p></li>
+<li><p>The “images” node has one or more image subnodes</p></li>
+<li><p>The “configurations” node has one or more configuration subnodes.
+Configuration are collections of images</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/ o image-tree
+    └── description = &quot;image description&quot;
+    └── timestamp = &lt;12399321&gt;
+    └── #address-cells = &lt;1&gt;
+    |
+    o images
+    | |
+    | o image-1 {...}
+    | o image-2 {...}
+    | ...
+    |
+    o configurations
+      └── default = &quot;conf-1&quot;
+      |
+      o conf-1 {...}
+      o conf-2 {...}
+      ...
+</pre></div>
+</div>
+<p>Below are the allowable properties for each node. Required properties, which
+must appear a valid UPL, are marked “(R)”. Optional properties are marked “(O)”.
+Platform Init must support both classes of properties.</p>
+<p>Nodes with properties are shown in the tables below:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usage legend: R=Required, O=Optional, OR=Optional but Recommended,
+SD=See Definition</p>
+</div>
+<p><strong>Node: / (Root Node)</strong></p>
+<div class="table-wrapper docutils container" id="id3">
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Node: /</span><a class="headerlink" href="#id3" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">description</span></code></p></td>
+<td><p>R</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code></p></td>
+<td><p>General description of the Payload. This
+may be displayed to the user.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code></p></td>
+<td><p>R</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>Last image modification time, as seconds
+in POSIX time format<sup>1</sup>. This is updated by
+any tool which creates or changes the FIT.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">size</span></code></p></td>
+<td><p>OR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>Total FIT image size including the FIT itself
+along with all the external images referenced by
+it (with data-offset and data-size).
+This size is required for parsing any loadable
+binary that should be loaded together.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">align</span></code></p></td>
+<td><p>R</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>Required alignment for images. Each image
+in the FIT is aligned to this value
+(‘data-offset’ property). Platform Init
+must ensure that each image is loaded to
+an address with this alignment, if no
+fixed load address is specified by the
+image.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">spec-version</span></code></p></td>
+<td><p>OR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>UPL image specification version in BCD
+format
+7 : 0 - Minor Version
+15 : 8 - Major Version
+31: 16 - Reserved
+For revision v0.90, the value will be
+0x0090.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">build-version</span></code></p></td>
+<td><p>O</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>Payload build revision.
+Major.Minor.Revision.Build
+The ImageRevision can be decoded as
+follows:
+7 : 0  - Build Number
+15 :8  - Revision
+23 :16 - Minor Version
+31 :24 - Major Version</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>When we get closer to 2106 we can consider allowing 64-bit values.</p></li>
+</ol>
+</div>
+<p><strong>Node: /images/&lt;name&gt;</strong></p>
+<div class="table-wrapper docutils container" id="id4">
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Node: /images/&lt;name&gt;</span><a class="headerlink" href="#id4" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>General description of the image. This may
+be displayed to the user.</p></td>
+</tr>
+<tr class="row-odd"><td><p>timestamp</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>Last image modification time for this image,
+as seconds in POSIX time format.</p></td>
+</tr>
+<tr class="row-even"><td><p>arch</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>Type of the architecture for which this
+image is intended:</p>
+<ul class="simple">
+<li><p>‘x86”</p></li>
+<li><p>“x86_64”</p></li>
+<li><p>“arm”</p></li>
+<li><p>“arm64”</p></li>
+<li><p>“riscv”</p></li>
+<li><p>“riscv64”</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>Type of the image. Must be “flat_binary”.
+Need it for compatibility with FIT spec.</p></td>
+</tr>
+<tr class="row-even"><td><p>compression</p></td>
+<td><p>O</p></td>
+<td><p>string</p></td>
+<td><p>Compression used to reduce image size:</p>
+<ul class="simple">
+<li><p>“none” - no compression (default)</p></li>
+<li><p>“lzma” - Lempel-Ziv-Markov chain-Algorithm,</p></li>
+<li><p>“lz4” - Lempel-Ziv-4</p></li>
+</ul>
+<p>If Platform Init should not decompress the
+data when loading it, this must be set to
+“none”.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>data-offset</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Offset of image data, measured from the end
+of the FIT metadata, i.e.
+fdt_totalsize(FIT) bytes after the start of
+the FIT, aligned to a 4-byte boundary.</p></td>
+</tr>
+<tr class="row-even"><td><p>data-size</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Size of image data in bytes. For compressed
+images, this is the size of the compressed
+data. The size of the uncompressed data is
+stored in the ‘uncomp-size’ property.</p></td>
+</tr>
+<tr class="row-odd"><td><p>load</p></td>
+<td><p>R / O</p></td>
+<td><p>u32 / u64</p></td>
+<td><p>This should not normally be needed, since
+Payloads should be loadable to any suitable
+address.</p>
+<p>Where that is not possible: This is the
+required load address for the image. Value
+Type matches the machine word size. This
+must be provided for the ‘firmware’ image in
+a configuration, but is optional for others.
+Images without a load address can be loaded
+to any suitable location. They can also be
+left where they are in the FIT, i.e. not
+loaded at all.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>project</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>Type of the image, indicating which project
+produced it <sup>3</sup>:</p>
+<ul class="simple">
+<li><p>“tianocore” - UEFI binary</p></li>
+<li><p>“u-boot” - U-Boot</p></li>
+<li><p>“op-tee” - Open Trusted Execution
+Environment</p></li>
+<li><p>“opensbi” - RISC-V OpenSBI</p></li>
+<li><p>“arm-trusted-firmware” - ARM Trusted
+Firmware</p></li>
+<li><p>“linuxboot” - Linuxboot</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>capabilities</p></td>
+<td><p>O</p></td>
+<td><p>string list</p></td>
+<td><p>List of capabilities that the Payload has:
+(not defined) <sup>4</sup></p></td>
+</tr>
+<tr class="row-even"><td><p>producer</p></td>
+<td><p>O</p></td>
+<td><p>string</p></td>
+<td><p>Indicates the build system and version
+which produced the FIT</p></td>
+</tr>
+<tr class="row-odd"><td><p>uncomp-size</p></td>
+<td><p>R / O</p></td>
+<td><p>u32</p></td>
+<td><p>Size of the uncompressed data in bytes. If
+the data is not compressed, this can be
+omitted.</p></td>
+</tr>
+<tr class="row-even"><td><p>entry-start</p></td>
+<td><p>O</p></td>
+<td><p>u32 / u64</p></td>
+<td><p>If required, this is the offset of the image
+entry point from the load address of the
+image. For example, a value of 0x10 means
+that the image entry point is 16 bytes after
+the start of the image. If omitted, a value
+of 0 is assumed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>reloc-start</p></td>
+<td><p>O</p></td>
+<td><p>u32 / u64</p></td>
+<td><p>If the image supports relocation, this is
+the offset of the start of the relocation
+data within the image.</p>
+<p>Relocation is described below here:
+<a class="reference internal" href="#relocation"><span class="std std-ref">2.4 Relocation</span></a>. This ‘image’
+must be loaded to the “load” address, or manually
+relocated by Platform Init.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Devicetree stores values in big-endian format</p></li>
+<li><p>This string also indicates the word size of the target machine, i.e. 32
+or 64. The #address-cells feature of device tree is not used since it
+requires a unit address in each node name that matches the ‘reg’ property
+and requires that a ‘reg’ property be included in each node (rather than
+‘load’) which could be confusing. It is possible to omit the ‘reg’
+property, but that results in a warning from the devicetree compiler dtc.
+Overall it seems better to use a separate mechanism, as is done here.</p></li>
+<li><p>Other project values will be allocated as needed and published in this
+specification</p></li>
+<li><p>Capability strings will be allocated as needed and published in this
+specification</p></li>
+</ol>
+</div>
+<p><strong>Node: /configurations</strong></p>
+<div class="table-wrapper docutils container" id="id5">
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Node: /configurations</span><a class="headerlink" href="#id5" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>O</p></td>
+<td><p>string</p></td>
+<td><p>Node name of the default configuration.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Node: /configurations/conf-n</strong></p>
+<div class="table-wrapper docutils container" id="id6">
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Node: /configurations/conf-n</span><a class="headerlink" href="#id6" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>General description of the configuration. This
+may be displayed to the user.</p></td>
+</tr>
+<tr class="row-odd"><td><p>firmware</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>Image name of the primary Payload image. This
+must correspond to a subnode of the “images” node.
+NOTE: Platform Init jumps to the entry address
+of the ‘firmware’ image after ‘firmware’ and
+‘loadables’ are loaded.</p></td>
+</tr>
+<tr class="row-even"><td><p>loadables</p></td>
+<td><p>SD</p></td>
+<td><p>string list</p></td>
+<td><p>List of additional Payload images could be
+separately loaded by Platform Init. Each must
+correspond to a subnode of the “images” node.
+This may be used to provide additional images
+required for the Payload to run, such as FV
+files, data files, secure OS, etc.
+This is not required if ‘require-fit’ is true,
+since the payload can access any part of the
+FIT without needing this property to indicate
+which images are needed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>compatible</p></td>
+<td><p>O</p></td>
+<td><p>string list</p></td>
+<td><p>List of compatible strings for Platform Init
+to use when selecting the best configuration,
+in order from most specific / desirable to
+least. This may be used to support using the
+same FIT with many different boards, where
+Platform Init understands the concept of a
+compatible string and can make this
+determination.</p></td>
+</tr>
+<tr class="row-even"><td><p>require-fit</p></td>
+<td><p>O</p></td>
+<td><p>empty</p></td>
+<td><p>The presence of this property means the whole
+fit image shall be loaded together before
+Platform Init calling payload entry.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="example-fit">
+<h4>2.3.1 Example FIT<a class="headerlink" href="#example-fit" title="Link to this heading">#</a></h4>
+<p>Shown below is a FIT structure in source form (Image Tree Source) of a Tianocore
+Payload. It shows three images and a single configuration: the main image
+“tianocore” and 2 more images “uefi-fv” and “bds-fv”. “uefi-fv” and “bds-fv” are
+included to be used later by the main image after the main image is executed.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/ {
+     description = “Uefi Payload”
+     timestamp = &lt;0x00000000&gt;
+     #address-cells = &lt;0x02&gt;;
+     size = &lt;0x00385000&gt;
+     spec-version = &lt;0x00000100&gt;;
+     build-revision = &lt;0x00010105&gt;;
+     images {
+             tianocore {
+                     description = &quot;Tianocore edk2-stable202208&quot;;
+                     timestamp = &lt;0x00000000&gt;
+                     project = &quot;tianocore&quot;;
+                     arch = &quot;x86_64&quot;;
+                     type = &quot;flat-binary&quot;;
+                     capabilities = &quot;smm-rebase&quot;, &quot;...&quot;;
+                     producer = &quot;My company&quot;;
+                     data-offset = &lt;...data…&gt;;
+                     data-size = &lt;...data…&gt;;
+                     reloc-start = &lt;start offset of reloc table within data&gt;;
+                     entry-start = &lt;0x121b10&gt;;
+                     load = &lt;0x120000&gt;;
+             };
+             uefi-fv {    // showing how to have multiple images
+           description = &quot;UEFI Firmware Volume&quot;;
+           type = &quot;flat-binary&quot;;
+                     arch = &quot;x86_64&quot;;
+                     project = &quot;tianocore&quot;;
+                     compression = &quot;lzma&quot;;
+                     data-offset = &lt;...data…&gt;;
+                     data-size = &lt;...data…&gt;;
+             };
+             bds-fv {
+                     description = &quot;BDS Firmware Volume&quot;;
+                     type = &quot;flat-binary&quot;;
+                     arch = &quot;x86_64&quot;;
+                     project = &quot;tianocore&quot;;
+             compression = &quot;lzma&quot;;
+             data-offset = &lt;...data…&gt;;
+             data-size = &lt;...data…&gt;;
+     };
+ };
+     configurations {
+             default = &quot;conf-1&quot;;
+             conf-1 {
+                     firmware = &quot;tianocore&quot;
+                     require-fit;
+             };
+     };
+ };
+</pre></div>
+</div>
+<p>Note that FIT supports loading Linux, ramdisks and other types of data. These
+are not addressed by this specification, since it is beyond the scope of the
+Payload. Consideration will be given to these in version 2.0 of this
+specification.</p>
+</section>
+<section id="fit-external-data">
+<h4>2.3.2 FIT External Data<a class="headerlink" href="#fit-external-data" title="Link to this heading">#</a></h4>
+<p>When created in source form, the FIT includes a “data ‘’ property in each image
+node, which contains the contents of that image. When converted to binary form,
+the ‘-E’ flag is passed to mkimage to tell it to move the data outside the FDT
+structure itself. This is convenient since it locates all the FDT metadata in
+one place at the start of the FIT, with the image data at the end. In this case,
+mkimage removes the “data” property and replaces it with “data-offset” and
+“data-size” properties.</p>
+<p>Each image in the FIT must be aligned to a 16-byte boundary, measured from the
+start of the FIT.</p>
+<p><strong>Additional images</strong></p>
+<p>The FIT may include several images. Platform Init must load each of these to the
+address provided.</p>
+<p>If no load address is provided, Platform Init is free to load the image to any
+suitable address.</p>
+<p>When calling the Payload, Platform Init must provide the addresses to which each
+image was loaded. This is done by updating the FIT load addresses for each
+image. This allows Payload to access related images when it executes. For UEFI
+these might include other firmware volumes (FVs).</p>
+<p>All images must be loaded by Platform Init before execution of the Payload
+starts. The Payload is not permitted to load additional images for its own use,
+e.g. data files or firmware volumes. This ensures that a clean handoff is
+completed, regardless of the boot media being used. Some reasons for this
+include:</p>
+<ul class="simple">
+<li><p>It permits verifying all images before the Payload is started, since it may
+not be possible for the Payload to report an error if something is missing or
+cannot be found.</p></li>
+<li><p>It allows Platform Init to be in complete control of what is executed; this
+will become important when verification is added to this specification.</p></li>
+<li><p>It allows Platform Init to choose the boot media being used.</p></li>
+</ul>
+</section>
+<section id="loading-process-example">
+<h4>2.3.3 Loading Process Example<a class="headerlink" href="#loading-process-example" title="Link to this heading">#</a></h4>
+<p>Here is an example of Platform Init loading EDK-II Payload:</p>
+<ol class="arabic simple">
+<li><p>Platform Init loads or locates the FIT, obtaining a pointer to its start
+address in memory</p></li>
+<li><p>Platform Init looks up  “configurations” -&gt; “firmware” -&gt; “tianocore” to know
+it is the main firmware binary blob.</p></li>
+<li><p>Either</p>
+<ul class="simple">
+<li><p>Simple loading: When “configurations” -&gt;”require-fit” present, Platform
+Init treats the whole FIT image as a single binary blob (no separate
+binary blob loading needed) and load the full FIT image to suitable
+address following FIT-&gt;size and FIT-&gt;align requirement. In this case, when
+Platform Init is calling the entry-offset of tianocore, it passes the
+handoff FDT to pass the addresses of the binary blobs within the FIT as
+per step 4.</p></li>
+<li><p>Full  loading: Platform Init firstly loads the “tianocore” binary blob
+from the FIT “images” list to address in its “load”, relocating if
+necessary. Note: if “tianocore”-&gt;“load” is not present, it means
+“tianocore” can be loaded to any suitable address. (no relocation needed).
+Platform Init then loads each desired binary blob listed by “loadables” to
+a suitable address.  The handoff FDT is used to pass the addresses of
+where things ended up as per step 4.</p></li>
+</ul>
+</li>
+<li><p>Platform Init sets up handoff information including the FIT address. When one
+of the “loadables” binary blobs is loaded by Platform Init, the FIT offset of
+that image node and the load address shall be reported as part of handoff
+information. Refer to <a class="reference internal" href="index.html#chapter-payload-handoff-format"><span class="std std-ref">Chapter 4: Payload Handoff Format</span></a>
+/options/upl-image node for more information.</p></li>
+<li><p>Platform Init calls the “tianocore” image entry point function (“load” +
+“entry-start” or “new base address” + “entry-start”), passing the handoff
+information along.</p></li>
+<li><p>Tianocore starts executing, locates the firmware volumes and starts up
+normally.</p></li>
+</ol>
+</section>
+<section id="implementation">
+<h4>2.3.4 Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h4>
+<p>To implement FIT, you can use libfdt, for example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">blob</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">images</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="n">u32</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">comp</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">payload_data</span><span class="p">;</span>
+
+<span class="c1">// load FDT into blob</span>
+<span class="n">images</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fdt_subnode_offset</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;images&quot;</span><span class="p">);</span>
+<span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fdt_subnode_offset</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span><span class="w"> </span><span class="n">images</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tianocore&quot;</span><span class="p">);</span>
+<span class="n">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fdt_getprop</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;compression&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fdt_getprop32</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data-offset&quot;</span><span class="p">);</span>
+<span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fdt_getprop32</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data-size&quot;</span><span class="p">);</span>
+<span class="n">payload_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blob</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">align4</span><span class="p">(</span><span class="n">fdt_totalsize</span><span class="p">(</span><span class="n">blob</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To generate a FIT there are many options. Some examples are:</p>
+<ul class="simple">
+<li><p>Use pylibfdt to build the image. Use ‘pip install pylibfdt’. You will need
+swig (apt install swig). For Windows see <a class="reference external" href="https://www.swig.org/Doc1.3/Windows.html">https://www.swig.org/Doc1.3/Windows.html</a>
+Make sure you set SWIG_DIR and SWIG_EXECUTABLE environment variables and that
+‘swig’ is on your path</p></li>
+<li><p>Create a Flat Image Tree file as above and compile it with dtc (<a class="reference external" href="https://manpages.ubuntu.com/manpages/trusty/man1/dtc.1.html">https://manpages.ubuntu.com/manpages/trusty/man1/dtc.1.html</a>)</p></li>
+<li><p>Use mkimage (<a class="reference external" href="https://manpages.ubuntu.com/manpages/xenial/man1/mkimage.1.html">https://manpages.ubuntu.com/manpages/xenial/man1/mkimage.1.html</a>)
+to build it</p></li>
+<li><p>Completely optional, but for my complex cases, binman
+(‘pip install binary-manager’) can create FIT images (Linux only at present)</p></li>
+</ul>
+</section>
+</section>
+<section id="relocation">
+<span id="id2"></span><h3>2.4 Relocation<a class="headerlink" href="#relocation" title="Link to this heading">#</a></h3>
+<section id="motivation">
+<h4>2.4.1 Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Relocation support is optional and only supports x86 for now.  Relocation
+support might be deprecated from V2.0 onwards. Further discussion on
+relocation will be needed after v1.0 achieved.</p>
+</div>
+<p>Ideally, the Payload should be able to run from any aligned address. This is
+indicated by omitting the “load” property in the image node. In this case,
+Platform Init chooses a suitable address and loads the Payload there.</p>
+<p>If the Payload must run at a particular address, it specifies this in the “load”
+property. Platform Init should try to honor this request. If it cannot, then the
+nly solution is to relocate the Payload. This is possible using the relocation
+information provided.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is an undesirable situation. Payloads should be written to run at any
+address, where possible.</p>
+</div>
+<p>Payloads which cannot run at any address must provide relocation data. Otherwise
+it may not be possible to load them. We see fixed load addresses with TF-A,
+U-Boot, OpenSBI, etc. It is not possible to require everything in the world to
+be self-relocating. Quite apart from the complexity of it, for debugging, etc.,
+it does add some code. See for example Linux, where it has its own decompressor,
+serial-output code, etc.</p>
+<p>A ‘clean’ handoff is basically a jump from one lot of code to another, with the
+minimum of cruft in between.</p>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li><p>Platform Init may not be able to load the Payload to the requested load
+address. For example, if the load address is 0x120000, some Platform Init may
+have something else at that address. This is not desirable but it may occur.
+EDK-II in particular is accustomed to relocating its images.</p></li>
+<li><p>Relocation costs time. Provided that Platform Init can accommodate any
+provided loaded address, Platform Init may elect not to support relocation. In
+this case the image is loaded to the correct load address and run from there</p></li>
+<li><p>Relocation adds complexity to Platform Init since, if it cannot honor the
+requested load address, it must process the relocations to update the Payload
+image before starting it.</p></li>
+<li><p>On the other hand, self-relocation adds complexity to the Payload, since it
+must be capable of running at any address and relocating itself to the
+requested address.</p></li>
+</ul>
+</section>
+<section id="relocation-format">
+<h4>2.4.2 Relocation Format<a class="headerlink" href="#relocation-format" title="Link to this heading">#</a></h4>
+<p>Relocation is supported by appending a table to the end of the image. The table
+consists of a number of relocation records which can be processed by Platform
+Init. The table forms part of the image and is included in the “data-size”
+property.</p>
+<p>A ‘reloc-start’ property is added to the image node to indicate where in the
+image the relocation data starts. So the total size of the relocation data is
+(data-size - reloc-start). Note that hashes include all data, including the
+relocation part. This is important since relocation could render an image
+inoperable if it were tampered with.</p>
+<p>To use a load address other than that specified for the image, Platform Init
+must process the relocation data, Platform Init:</p>
+<ol class="arabic simple">
+<li><p>Loads the functional part of the image into memory at the desired load
+address</p></li>
+<li><p>Calculates the offset from the desired load address, reloc_offset</p></li>
+<li><p>Scans the relocation table appended to the image, marked by reloc-start</p></li>
+<li><p>For each relocation entry (type, offset, optional addend), applies the
+relocation operation &lt;type&gt; to offset &lt;offset&gt; of the loaded image</p></li>
+<li><p>Once complete, the image is ready to run at the new load address required by
+Platform Init.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Another option was considered, with a relocation subnode with a separate
+data size and offset. This was considered more complex overall: it adds
+another subnode, meaning that the data to be hashed is potentially in
+two places. It also adds to tooling complexity. In particular, mkimage
+would need to be extended to support this. So having the relocation
+data inside the image data seems simpler overall.</p>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/ {
+     upl-size = &lt;0x003850000&gt;
+     compatible = &quot;universal-payload&quot;;
+     upl-version = &lt;0x0100&gt;; // top 8 bits major, bottom 8 minor
+     images {
+                 tianocore {
+                         description = &quot;Tianocore edk2-stable202208&quot;;
+                         …
+                         data-offset = &lt;payload offset&gt;;
+                         data-size = &lt;payload size in bytes&gt;
+                     relocation {   // optional
+                             data-size = &lt;...&gt;;
+                             data-offset = &lt;...&gt;;
+                     };
+         };
+     };
+  };
+</pre></div>
+</div>
+</section>
+<section id="relocation-records">
+<h4>2.4.3 Relocation Records<a class="headerlink" href="#relocation-records" title="Link to this heading">#</a></h4>
+<p>Relocation records consist of two or three words. where the size of a word is
+determined by the architecture (32- or 64-bit). The word size is determined by
+the “arch” property of the image. Relocations are always in little-endian
+format. Big-endian machines must byteswap each word.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Relocations may be expected to add 15% to the size of the binary.</p>
+</div>
+<p>The format is shown below:-</p>
+<p>For 32-bit it is 8 or 12 bytes per record:</p>
+<blockquote>
+<div><div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reloc_offset</p></td>
+<td><p>offset into program</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>index_and_type</p></td>
+<td><p>relocation type in lower 8 bits
+symbol index (above that)</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>addend</p></td>
+<td><p>optional addend (depending on
+relocation type)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+<p>For 64-bit it is 16 or 24 bytes per record:</p>
+<blockquote>
+<div><div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>reloc_offset</p></td>
+<td><p>offset into program</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>index_and_type</p></td>
+<td><p>relocation type in lower 32 bits
+symbol index (upper 64 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10</p></td>
+<td><p>addend</p></td>
+<td><p>optional addend (depending on
+relocation type)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+<p>Available relocation types are defined below. These may include arch-specific
+relocations and typically follow the values used by the ELF format. For now
+only x86 is supported. This will be a unified list of supported relocations
+(if other Arch also supports relocation):</p>
+<blockquote>
+<div><div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Arch</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x86</p></td>
+<td><p>1</p></td>
+<td><p>u32 sym_addr += reloc_offset</p></td>
+</tr>
+<tr class="row-odd"><td><p>x86</p></td>
+<td><p>2</p></td>
+<td><p>u64 sym_addr += reloc_offset</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+</section>
+</section>
+</section>
+<span id="document-chapter3-payload-handoff-state"></span><section id="chapter-3-payload-handoff-state">
+<span id="chapter-payload-handoff-state"></span><h2>Chapter 3: Payload Handoff State<a class="headerlink" href="#chapter-3-payload-handoff-state" title="Link to this heading">#</a></h2>
+<section id="overview">
+<h3>3.1 Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
+<p>This section describes the machine state and register settings for handing over
+control to the Payload. This is naturally architecture-specific but where
+possible a similar approach is followed for each architecture.</p>
+</section>
+<section id="requirements-for-all-architectures">
+<h3>3.2 Requirements for all architectures<a class="headerlink" href="#requirements-for-all-architectures" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Interrupts must be disabled so that an interrupt during handover will not
+cause ambiguity as to whether Platform Init or Payload will service the
+interrupt</p></li>
+<li><p>DMA must be disabled, so as to avoid undefined behaviour.</p></li>
+<li><p>At least 16KB must be available on the stack as passed through to the
+Payload. The stack must be aligned as defined by the architecture. Payload
+can set up its own stack from available memory when necessary, so the
+Platform Init stack should only be used for initial setup.</p></li>
+</ul>
+<p>Some general guidelines:</p>
+<ul class="simple">
+<li><p>Set as few things as possible, because across the range of architectures,
+and implementations, very little is constant</p></li>
+<li><p>If page tables are set up, try to use GiB pages and coarse mappings. Kernels
+will change them anyway. It is not essential that we exactly match the page
+tables to available memory; e.g., we might have 4.5 GiB of memory and set up
+page tables for 5 GiB. That is acceptable as long as we accurately report
+memory size to the payload.</p></li>
+<li><p>Correct memory maps are critical. E820 is not sufficient to describe memory
+maps across all architectures.</p></li>
+<li><p>Define what parameters need to be passed to the first payload, e.g. a pointer
+to the root of a table as the first arg, etc. The number of parameters should
+be kept small.</p></li>
+</ul>
+</section>
+<section id="architecture">
+<h3>3.3 Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h3>
+<p>This describes the handoff register settings for each architecture:</p>
+<section id="arm">
+<h4>3.3.1 ARM<a class="headerlink" href="#arm" title="Link to this heading">#</a></h4>
+<p>Register calling:-</p>
+<p>32-bit:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>r0: Reserved, must be zero
+r1: divided into the following fields:
+   r1[23:0]: set to the TL signature (0x6e_d0ff)
+   r1[31:24]: version of the register convention used. Set to 0 for the convention specified in this document.
+r2: Pointer to FDT
+r3: Reserved, must be zero
+r13: Stack pointer
+r14: Link register (for returning to Platform Init)
+</pre></div>
+</div>
+<p>64-bit:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x0: Pointer to FDT
+x1:  divided into the following fields:
+   x1[23:0]: set to the TL signature (0x6e_d0ff)
+   x1[31:24]: version of the register convention used. Set to 0 for the convention specified in this document.
+   x1[63:32]: reserved, must be zero.
+x2: Reserved, must be zero
+x3: Reserved, must be zero
+sp: Stack pointer
+r14: Return value, for returning to Platform Init
+</pre></div>
+</div>
+<p>Additionally:</p>
+<ul class="simple">
+<li><p>Unaligned access must be enabled.</p></li>
+<li><p>If MMU is enabled, MMU configuration must use only 4k pages and a single
+translation base register (TTBR0)</p></li>
+</ul>
+</section>
+<section id="risc-v">
+<h4>3.3.2 RISC-V<a class="headerlink" href="#risc-v" title="Link to this heading">#</a></h4>
+<p>We should follow this standard: <a class="reference external" href="https://github.com/riscv-software-src/opensbi/blob/master/docs/firmware/fw.md">https://github.com/riscv-software-src/opensbi/blob/master/docs/firmware/fw.md</a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>a0/x10: hartid
+a1/x11: device tree blob address in memory via a1 register. The address must be aligned to 8 bytes.
+Valid sp (stack pointer register) containing valid sp address
+MMU should be disabled
+</pre></div>
+</div>
+</section>
+<section id="x86">
+<h4>3.3.3 x86<a class="headerlink" href="#x86" title="Link to this heading">#</a></h4>
+<p><strong>Instruction execution environment</strong></p>
+<p>Regardless of the environment where the Platform Init runs, the processor is in
+32bit protected mode when a 32bit payload starts, or in 64bit long-mode when a
+64bit payload starts. The payload header contains the machine type information
+that the payload supports.
+The following sections provide a detailed description of the execution
+environment when the payload starts.</p>
+<p><strong>Registers</strong></p>
+<ul class="simple">
+<li><p>Direction flag in EFLAGs is clear so the string instructions process from low
+addresses to high addresses.</p></li>
+<li><p>All other general-purpose register states are undefined.</p></li>
+<li><p>Floating-point control word is initialized to 0x027F (all exceptions masked,
+double-precision, round-to-nearest).</p></li>
+<li><p>Multimedia-extensions control word (if supported) is initialized to 0x1F80
+(all exceptions</p></li>
+<li><p>Masked, round-to-nearest, flush to zero for masked underflow).</p></li>
+<li><p>CR0.EM is clear.</p></li>
+<li><p>CR0.TS is clear.</p></li>
+</ul>
+<p>32-bit:</p>
+<p>ESP + 4 points to the address of the FDT table for the 32bit payload.</p>
+<p>64-bit:</p>
+<p>RCX holds the address of the FDT table for the 64bit payload.</p>
+<p><strong>Interrupt</strong></p>
+<p>The hardware is initialized by the Platform Init such that no interrupt triggers
+even when the payload sets the Interrupt Enable flag in EFLAGs.</p>
+<p><strong>Page table</strong></p>
+<ul class="simple">
+<li><p>Selectors are set to be flat.</p></li>
+<li><p>Paging mode may be enabled for the 32bit payload. (have general term on how it
+could be enabled if enabling page mode).</p></li>
+<li><p>Paging mode is enabled for the 64bit payload.</p></li>
+<li><p>When paging is enabled, all memory space is identity mapped (virtual address
+equals physical address). The four-level page table is set up. The payload
+can choose to set up the five-level page table as needed.</p></li>
+</ul>
+<p><strong>Stack</strong></p>
+<p>The stack is 16-byte aligned and may be marked as non-executable in page table.</p>
+<p><strong>Application processors</strong></p>
+<p>Payload starts on the bootstrap processor. All application processors (on a
+multiple-processor system) are in halt state.</p>
+<p>Payload may re-initialize the application processors to support multi-thread
+process and Platform Init multi-processor service may not work after the payload
+phase in this case.</p>
+</section>
+</section>
+</section>
+<span id="document-chapter4-payload-handoff-format"></span><section id="chapter-4-payload-handoff-format">
+<span id="chapter-payload-handoff-format"></span><h2>Chapter 4: Payload Handoff Format<a class="headerlink" href="#chapter-4-payload-handoff-format" title="Link to this heading">#</a></h2>
+<p>Here we define the handoff information from Platform Init to Payload, and it
+takes the form of an devicetree blob. This section describes the bindings used
+for each area addressed by this specification.</p>
+<p>A devicetree is a tree data structure with nodes that describe the devices in a
+system. Each node has exactly one parent except for the root node, which has no
+parent. Each node has property/value pairs that describe the characteristics of
+the device being presented. Properties consist of a name and a value. Property
+names are strings of 1 to 31 characters, property value is an array of zero or
+more bytes that contain information associated with the property.</p>
+<p>The sections below show what nodes should be passed from Platform Init and its
+corresponding property / value. It does not change what is passed from the
+Payload to the OS, but it is intended to avoid interfering with it, i.e. it uses
+the same bindings where possible.</p>
+<p>A pointer to the FIT is provided so that the running image can find other images
+it needs and find out where they were loaded.</p>
+<p>Note that properties indicated as ‘u32 / u64’ have a side determined by the
+architecture, either 32 or 64 bits.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>‘Usage’ legend for nodes: R=Required, O=Optional, OR=Optional but</dt><dd><p>Recommended, SD=See Definition</p>
+</dd>
+</dl>
+</div>
+<p>Many of these sections reference the Devicetree Specification <a class="reference internal" href="index.html#dtspec" id="id1"><span>[DTspec]</span></a>.</p>
+<p>TBD (Nodes)</p>
+</section>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Universal Payload Workgroup
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>
