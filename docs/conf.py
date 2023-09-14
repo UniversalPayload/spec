@@ -33,6 +33,9 @@ try:
 except:
     version = "unknown-rev"
 # The full version, including alpha/beta/rc tags
+# TEMP FIX: Hardcode the version here until Github resolves the Github Action Tag issue:
+# https://github.com/orgs/community/discussions/62991
+version = "v0.8"
 release = version
 
 
