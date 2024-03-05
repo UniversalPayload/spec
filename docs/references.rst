@@ -42,3 +42,6 @@ References
 
 .. [FITspec] `Flat Image Tree Specification Release v0.8
    <https://github.com/open-source-firmware/flat-image-tree/releases/tag/v0.8>`_
+
+.. [PCIBusBinding] `IEEE Std 1275-1994 Standard for Boot Firmware v2.1
+   <https://www.openfirmware.info/data/docs/bus.pci.pdf>`_
