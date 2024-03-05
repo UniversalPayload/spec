@@ -35,7 +35,7 @@ except:
 # The full version, including alpha/beta/rc tags
 # TEMP FIX: Hardcode the version here until Github resolves the Github Action Tag issue:
 # https://github.com/orgs/community/discussions/62991
-version = "v0.8"
+version = "v0.9.0-preview"
 release = version
 
 
@@ -133,7 +133,7 @@ html_favicon = "_images/upl-favicon.svg"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+#html_static_path = ['_static']
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -179,7 +179,7 @@ latex_elements = {
 ''',
 }
 
-# Release numbers with a qualifier (ex. '-rc', '-draft') get a watermark.
+# Release numbers with a qualifier (ex. '-rc', '-preview') get a watermark.
 if '-' in release:
     latex_elements['preamble'] += '\\usepackage{draftwatermark}\\SetWatermarkScale{.45}\\SetWatermarkText{%s}' % (release)
 
