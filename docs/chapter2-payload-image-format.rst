@@ -135,37 +135,37 @@ Nodes with properties are shown in the tables below:
 
 **Node: / (Root Node)**
 
-.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
+.. tabularcolumns:: | p{3cm} p{0.75cm} p{2cm} p{9.5cm} |
 .. table:: Node: /
 
    ======================= ===== ===================== ===============================================
    Property Name           Usage Value Type            Definition
    ======================= ===== ===================== ===============================================
-   ``description``         R     ``<string>``          General description of the Payload. This
+   ``description``         R     string                General description of the Payload. This
                                                        may be displayed to the user.
-   ``timestamp``           R     ``<u32>``             Last image modification time, as seconds
+   ``timestamp``           R     u32                   Last image modification time, as seconds
                                                        in POSIX time format\ :sup:`1`. This is updated by
                                                        any tool which creates or changes the FIT.
-   ``size``                OR    ``<u32>``             Total FIT image size including the FIT itself
+   ``size``                OR    u32                   Total FIT image size including the FIT itself
                                                        along with all the external images referenced by
                                                        it (with data-offset and data-size).
                                                        This size is required for parsing any loadable
                                                        binary that should be loaded together.
-   ``align``               R     ``<u32>``             Required alignment for images. Each image
+   ``align``               R     u32                   Required alignment for images. Each image
                                                        in the FIT is aligned to this value
                                                        ('data-offset' property). Platform Init
                                                        must ensure that each image is loaded to
                                                        an address with this alignment, if no
                                                        fixed load address is specified by the
                                                        image.
-   ``spec-version``        OR    ``<u32>``             UPL image specification version in BCD
+   ``spec-version``        OR    u32                   UPL image specification version in BCD
                                                        format
                                                        7 : 0 - Minor Version
                                                        15 : 8 - Major Version
                                                        31: 16 - Reserved
                                                        For revision v0.90, the value will be
                                                        0x0090.
-   ``build-version``       O     ``<u32>``             Payload build revision.
+   ``build-version``       O     u32                   Payload build revision.
                                                        Major.Minor.Revision.Build
                                                        The ImageRevision can be decoded as
                                                        follows:
@@ -181,7 +181,7 @@ Nodes with properties are shown in the tables below:
 
 **Node: /images/<name>**
 
-.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
+.. tabularcolumns:: | p{3cm} p{0.75cm} p{2cm} p{9.5cm} |
 .. table:: Node: /images/<name>
 
    ================= =========== ============ ==============================================
@@ -219,7 +219,7 @@ Nodes with properties are shown in the tables below:
                                               images, this is the size of the compressed
                                               data. The size of the uncompressed data is
                                               stored in the 'uncomp-size' property.
-   load              R / O       u32 / u64    This should not normally be needed, since
+   load              OR          u32 / u64    This should not normally be needed, since
                                               Payloads should be loadable to any suitable
                                               address.
 
@@ -247,7 +247,7 @@ Nodes with properties are shown in the tables below:
                                               (not defined) \ :sup:`4`
    producer          O           string       Indicates the build system and version
                                               which produced the FIT
-   uncomp-size       R / O       u32          Size of the uncompressed data in bytes. If
+   uncomp-size       OR          u32          Size of the uncompressed data in bytes. If
                                               the data is not compressed, this can be
                                               omitted.
    entry-start       O           u32 / u64    If required, this is the offset of the image
@@ -284,7 +284,7 @@ Nodes with properties are shown in the tables below:
 
 **Node: /configurations**
 
-.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
+.. tabularcolumns:: | p{3cm} p{0.75cm} p{2cm} p{9.5cm} |
 .. table:: Node: /configurations
 
    ================= =========== ============ ==============================================
@@ -295,7 +295,7 @@ Nodes with properties are shown in the tables below:
 
 **Node: /configurations/conf-n**
 
-.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
+.. tabularcolumns:: | p{3cm} p{0.75cm} p{2cm} p{9.5cm} |
 .. table:: Node: /configurations/conf-n
 
    ================= =========== ============ ==============================================
