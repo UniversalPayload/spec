@@ -149,18 +149,38 @@ latex_elements = {
     #
     # 'pointsize': '10pt',
 
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     'figure_align': 'H',
+
+    # Add or modify the preamble entry as follows:
+    # Set \cftsecleader to remove auto numbering from Table of Content
+    # set \setcounter{secnumdepth}{0} stop section numbering
+    # Use makeatlatter to remove auto chapters & numbering from each section.
+    # This is because the default latex "manual" format automatically
+    # generates chapter and section numbering, overlapping the pre-configured
+    # numberings, which will mess up the pdf.
+    # Add 'longtable' support to prevent the table being truncated when it is
+    # longer than one page during pdf generation.
+    'preamble': r'''
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{secnumdepth}{0}
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}% Adjust the space above the chapter title as needed
+  {\parindent \z@ \raggedright \normalfont
+    \Huge\bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+\usepackage{longtable}
+''',
 }
 
-# Release numbers with a qualifier (ex. '-rc', '-pre') get a watermark.
+# Release numbers with a qualifier (ex. '-rc', '-draft') get a watermark.
 if '-' in release:
-    latex_elements['preamble'] = '\\usepackage{draftwatermark}\\SetWatermarkScale{.45}\\SetWatermarkText{%s}' % (release)
+    latex_elements['preamble'] += '\\usepackage{draftwatermark}\\SetWatermarkScale{.45}\\SetWatermarkText{%s}' % (release)
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
