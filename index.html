@@ -612,20 +612,20 @@ SD=See Definition</p>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">description</span></code></p></td>
 <td><p>R</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code></p></td>
+<td><p>string</p></td>
 <td><p>General description of the Payload. This
 may be displayed to the user.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code></p></td>
 <td><p>R</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>u32</p></td>
 <td><p>Last image modification time, as seconds
 in POSIX time format<sup>1</sup>. This is updated by
 any tool which creates or changes the FIT.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">size</span></code></p></td>
 <td><p>OR</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>u32</p></td>
 <td><p>Total FIT image size including the FIT itself
 along with all the external images referenced by
 it (with data-offset and data-size).
@@ -634,7 +634,7 @@ binary that should be loaded together.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">align</span></code></p></td>
 <td><p>R</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>u32</p></td>
 <td><p>Required alignment for images. Each image
 in the FIT is aligned to this value
 (‘data-offset’ property). Platform Init
@@ -645,7 +645,7 @@ image.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">spec-version</span></code></p></td>
 <td><p>OR</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>u32</p></td>
 <td><p>UPL image specification version in BCD
 format
 7 : 0 - Minor Version
@@ -656,7 +656,7 @@ For revision v0.90, the value will be
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">build-version</span></code></p></td>
 <td><p>O</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>u32</p></td>
 <td><p>Payload build revision.
 Major.Minor.Revision.Build
 The ImageRevision can be decoded as
@@ -751,7 +751,7 @@ data. The size of the uncompressed data is
 stored in the ‘uncomp-size’ property.</p></td>
 </tr>
 <tr class="row-odd"><td><p>load</p></td>
-<td><p>R / O</p></td>
+<td><p>OR</p></td>
 <td><p>u32 / u64</p></td>
 <td><p>This should not normally be needed, since
 Payloads should be loadable to any suitable
@@ -797,7 +797,7 @@ Firmware</p></li>
 which produced the FIT</p></td>
 </tr>
 <tr class="row-odd"><td><p>uncomp-size</p></td>
-<td><p>R / O</p></td>
+<td><p>OR</p></td>
 <td><p>u32</p></td>
 <td><p>Size of the uncompressed data in bytes. If
 the data is not compressed, this can be
@@ -1449,164 +1449,8 @@ architecture, either 32 or 64 bits.</p>
 </dd>
 </dl>
 </div>
-<p>Many of these sections refer to the Devicetree Specification <a class="reference internal" href="index.html#dtspec" id="id1"><span>[DTspec]</span></a>.</p>
-<section id="node-root-node-r">
-<h3>4.1 Node: / (Root Node) (R)<a class="headerlink" href="#node-root-node-r" title="Link to this heading">#</a></h3>
-<div class="table-wrapper docutils container" id="id2">
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-number">Table 6 </span><span class="caption-text">Node: /</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Property</p></th>
-<th class="head"><p>Usage</p></th>
-<th class="head"><p>Value Type</p></th>
-<th class="head"><p>Definition</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>#address-cells</p></td>
-<td><p>R</p></td>
-<td><p>u32</p></td>
-<td><p>Indicates the number of cells used in addresses in the
-handoff.</p></td>
-</tr>
-<tr class="row-odd"><td><p>#size-cells</p></td>
-<td><p>R</p></td>
-<td><p>u32</p></td>
-<td><p>Indicates the number of cells used for sizes in the
-handoff.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="node-options-upl-params-r">
-<h3>4.2 Node: /options/upl-params (R)<a class="headerlink" href="#node-options-upl-params-r" title="Link to this heading">#</a></h3>
-<p>These are the generic parameters/ settings of the UPL payload.</p>
-<div class="table-wrapper docutils container" id="id3">
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-number">Table 7 </span><span class="caption-text">Node: /options/upl-params</span><a class="headerlink" href="#id3" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Property</p></th>
-<th class="head"><p>Usage</p></th>
-<th class="head"><p>Value Type</p></th>
-<th class="head"><p>Definition</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>compatible</p></td>
-<td><p>R</p></td>
-<td><p>string</p></td>
-<td><p>“upl”</p></td>
-</tr>
-<tr class="row-odd"><td><p>boot-mode</p></td>
-<td><p>O</p></td>
-<td><p>string list</p></td>
-<td><p>For supporting different Payload boot flows. These influence how the payload runs. Note that this is not intended to support multiple Payloads.</p>
-<p>“normal” means booting with full functionality, from power off.
-“fast” means fast boot with no configuration change or minimal functionality.
-“full”, “diag” means booting with full functionality plus diagnostics functions.
-“default” means booting with “reset to default” flow (for example, boot from RTC battery power failure).
-“s4” means resuming from ACPI S4 state (resume from disk).
-“factory” means booting with manufacturing mode.
-“s3” means resuming from ACPI S3 state (resume from memory).</p>
-<p>Payload is not required to support all of the boot modes. For boot modes those are not supported by Payload, Payload can just ignore them without any specific actions.</p>
-</td>
-</tr>
-<tr class="row-even"><td><p>addr-width</p></td>
-<td><p>O</p></td>
-<td><p>u32</p></td>
-<td><p>52 means host address width is 52 bits. 46 means address width is 46 bits.
-This is mainly used by Payloads when initializing page tables. This can eliminate directly SoC accessing from payload for retrieving such information.</p></td>
-</tr>
-<tr class="row-odd"><td><p>pci-enum-done</p></td>
-<td><p>O</p></td>
-<td><p>Boolean</p></td>
-<td><p>If this property exists, payload can assume that Platform Init has done full PCI enumeration, resource assignment, and PCI Oprom loading, and those do not have to be done again by payload.</p>
-<p>In some payloads, a simple PCI enumeration may still be executed even with “pci-enum-done” to collect PCI device information and bind corresponding drivers to provide services and functionality. (for example, find out network controller and bind network driver to support network functionality)</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="node-options-upl-images-addr-r">
-<h3>4.3 Node: /options/upl-images&#64;&lt;addr&gt; (R)<a class="headerlink" href="#node-options-upl-images-addr-r" title="Link to this heading">#</a></h3>
-<p>The behavior of Platform Init when loading a FIT cannot always be known at build
-time. For example:</p>
-<ul class="simple">
-<li><p>Platform Init may select one of several configurations when loading the
-Payload; the configuration chosen may depend on the hardware that it is
-running on</p></li>
-<li><p>Platform Init may load images to any address if there is no ‘load’ property in
-the image.</p></li>
-</ul>
-<p>The Payload may need to know where one of the images ended up in memory, or
-which configuration was chosen. It cannot find this out by itself. The
-‘loaded-image’ node provides information to help with these problems.</p>
-<div class="table-wrapper docutils container" id="id4">
-<table class="docutils align-default" id="id4">
-<caption><span class="caption-number">Table 8 </span><span class="caption-text">Node: /options/upl-images&#64;&lt;addr&gt;</span><a class="headerlink" href="#id4" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Property</p></th>
-<th class="head"><p>Usage</p></th>
-<th class="head"><p>Value Type</p></th>
-<th class="head"><p>Definition</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>reg</p></td>
-<td><p>R</p></td>
-<td><p>prop-encoded array</p></td>
-<td><p>Address and size of FIT image that was loaded and executed to reach this point. This is required if the Payload must have access to the FIT to operate, e.g., if
-Platform Init does not load the images to a new address. Otherwise, it is optional.</p></td>
-</tr>
-<tr class="row-odd"><td><p>conf-offset</p></td>
-<td><p>O</p></td>
-<td><p>u32</p></td>
-<td><p>Offset within FIT of the configuration node that was selected. If the FIT is not available to the Payload, this may be omitted.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="node-options-upl-image-image-addr-o">
-<h3>4.4 Node: /options/upl-image/image&#64;&lt;addr&gt; (O)<a class="headerlink" href="#node-options-upl-image-image-addr-o" title="Link to this heading">#</a></h3>
-<p>This node is only required if Platform Init loaded the images to different
-addresses. In the case where the FIT is used in-place, this is not needed.</p>
-<p>The name of this node must match the name of the corresponding image node in the
-FIT. This provides information about the loaded images.</p>
-<p>Each loaded image has a separate node created with the following properties:</p>
-<div class="table-wrapper docutils container" id="id5">
-<table class="docutils align-default" id="id5">
-<caption><span class="caption-number">Table 9 </span><span class="caption-text">/options/upl-image/image&#64;&lt;addr&gt;</span><a class="headerlink" href="#id5" title="Link to this table">#</a></caption>
-<thead>
-<tr class="row-odd"><th class="head"><p>Property</p></th>
-<th class="head"><p>Usage</p></th>
-<th class="head"><p>Value Type</p></th>
-<th class="head"><p>Definition</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>reg</p></td>
-<td><p>R</p></td>
-<td><p>prop-encoded array</p></td>
-<td><p>Address and size that the image was actually loaded to. This is normally the same as the FIT load address, but can be different if anything was relocated, or if
-the FIT did not provide a load address.</p></td>
-</tr>
-<tr class="row-odd"><td><p>offset</p></td>
-<td><p>O</p></td>
-<td><p>u32</p></td>
-<td><p>Offset within FIT of the image node for this image. If the FIT is not available to the Payload, this may be omitted.</p></td>
-</tr>
-<tr class="row-even"><td><p>description</p></td>
-<td><p>R</p></td>
-<td><p>string</p></td>
-<td><p>Description value for this image from the FIT.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
+<p>Many of these sections reference the Devicetree Specification <a class="reference internal" href="index.html#dtspec" id="id1"><span>[DTspec]</span></a>.</p>
+<p>TBD (Nodes)</p>
 </section>
 </div>
 </section>
