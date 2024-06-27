@@ -116,18 +116,19 @@ html_theme = 'furo'
 # documentation.
 html_theme_options = {
     "source_repository": "https://github.com/universalpayload/spec/",
-    "source_branch": "master",
+    "source_branch": "main",
     "source_directory": "docs/",
 }
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = "_images/upl-logo.svg"
+# Credit goes to 9elements Design Team for the great logo design :)
+html_logo = "_images/upl-logo_round.png"
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = "_images/upl-favicon.png"
+html_favicon = "_images/upl-favicon.svg"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
