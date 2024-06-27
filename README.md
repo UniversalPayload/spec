@@ -11,9 +11,11 @@ and LaTeX.
 
 Requirements:
 * Sphinx: http://sphinx-doc.org/contents.html
- * version 3 or later
+    * version 7 or later (tested on 7.3.7)
 * LaTeX (and pdflatex, and various LaTeX packages)
 * Graphviz (in particular, "dot"): http://www.graphviz.org/
+* Furo: https://pypi.org/project/furo/
+    * version 2024.5.6 or later
 
 On Debian and Ubuntu:
 
@@ -53,7 +55,10 @@ On Debian and Ubuntu:
 
 On Mac OS X:
 
-> Install [MacTeX](http://tug.org/mactex/)
+> Install [MacTeX](http://tug.org/mactex/) for LaTeX support
+>```
+>$ brew install --cask mactex
+>```
 >
 > Install pip3 using [brew](http://brew.sh) if you do not have it:
 >```
