@@ -19,7 +19,7 @@ contributions to this specification:
 * Jose Marinho (Arm)
 * Lean Sheng Tan (9elements)
 * Maximilian Brune (9elements)
-* Ron Minnich (Samsung)
+* Ron Minnich (Google)
 * Samer Mahmoud (Arm)
 * Simon Glass (Google)
 * Vincent Zimmer (Intel)

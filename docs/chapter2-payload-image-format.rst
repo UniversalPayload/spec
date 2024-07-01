@@ -529,7 +529,7 @@ Platform Init chooses a suitable address and loads the Payload there.
 
 If the Payload must run at a particular address, it specifies this in the "load"
 property. Platform Init should try to honor this request. If it cannot, then the 
-nly solution is to relocate the Payload. This is possible using the relocation
+only solution is to relocate the Payload. This is possible using the relocation
 information provided.
 
 .. note::

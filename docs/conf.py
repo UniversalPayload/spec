@@ -35,7 +35,7 @@ except:
 # The full version, including alpha/beta/rc tags
 # TEMP FIX: Hardcode the version here until Github resolves the Github Action Tag issue:
 # https://github.com/orgs/community/discussions/62991
-version = "v0.8"
+version = "v0.9.0-preview"
 release = version
 
 
@@ -43,7 +43,7 @@ release = version
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-needs_sphinx = '1.2.3'
+needs_sphinx = '7.3.7'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -116,23 +116,24 @@ html_theme = 'furo'
 # documentation.
 html_theme_options = {
     "source_repository": "https://github.com/universalpayload/spec/",
-    "source_branch": "master",
+    "source_branch": "main",
     "source_directory": "docs/",
 }
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = "_images/upl-logo.svg"
+# Credit goes to 9elements Design Team for the great logo design :)
+html_logo = "_images/upl-logo_round.png"
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = "_images/upl-favicon.png"
+html_favicon = "_images/upl-favicon.svg"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+#html_static_path = ['_static']
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -178,7 +179,7 @@ latex_elements = {
 ''',
 }
 
-# Release numbers with a qualifier (ex. '-rc', '-draft') get a watermark.
+# Release numbers with a qualifier (ex. '-rc', '-preview') get a watermark.
 if '-' in release:
     latex_elements['preamble'] += '\\usepackage{draftwatermark}\\SetWatermarkScale{.45}\\SetWatermarkText{%s}' % (release)
 
