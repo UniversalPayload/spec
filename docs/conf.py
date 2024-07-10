@@ -35,7 +35,7 @@ except:
 # The full version, including alpha/beta/rc tags
 # TEMP FIX: Hardcode the version here until Github resolves the Github Action Tag issue:
 # https://github.com/orgs/community/discussions/62991
-version = "v0.9.0-preview"
+version = "v0.9.1-preview"
 release = version
 
 

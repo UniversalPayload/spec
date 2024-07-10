@@ -10,6 +10,10 @@ Revision History
    ========= =========== ====================================================
    Revision  Date        Description
    ========= =========== ====================================================
+   0.9.1     2024-JUL-10 Add 2 memory nodes in chapter 4
+
+                         * /memory
+                         * reserved-memory
    0.9.0     2024-JUN-28 Incude the first version of chapter 4: Payload
                          Handoff Format. These device tree nodes have been
                          included as part of Chapter 4:
