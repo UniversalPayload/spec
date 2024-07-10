@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
-    <link rel="shortcut icon" href="_static/upl-favicon.png"/><!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Universal Payload Specification v0.8 documentation</title>
+    <link rel="shortcut icon" href="_static/upl-favicon.svg"/><!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Universal Payload Specification v0.9.0-preview documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -204,7 +204,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/upl-logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="_static/upl-logo_round.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text">Universal Payload Specification</span>
@@ -260,7 +260,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="spec-fullname-specversion">
-<h1>UPL Specification v0.8<a class="headerlink" href="#spec-fullname-specversion" title="Link to this heading">¶</a></h1>
+<h1>UPL Specification v0.9.0-preview<a class="headerlink" href="#spec-fullname-specversion" title="Link to this heading">¶</a></h1>
 <p><strong>Scope</strong></p>
 <p>This document defines technical specifications for a Universal Payload to be
 used as a common payload handoff interface in between Platform Init and Payload.</p>
@@ -316,7 +316,7 @@ contributions to this specification:</p>
 <li><p>Jose Marinho (Arm)</p></li>
 <li><p>Lean Sheng Tan (9elements)</p></li>
 <li><p>Maximilian Brune (9elements)</p></li>
-<li><p>Ron Minnich (Samsung)</p></li>
+<li><p>Ron Minnich (Google)</p></li>
 <li><p>Samer Mahmoud (Arm)</p></li>
 <li><p>Simon Glass (Google)</p></li>
 <li><p>Vincent Zimmer (Intel)</p></li>
@@ -337,7 +337,26 @@ contributions to this specification:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0.8</p></td>
+<tr class="row-even"><td><p>0.9.0</p></td>
+<td><p>2024-JUN-28</p></td>
+<td><p>Incude the first version of chapter 4: Payload
+Handoff Format. These device tree nodes have been
+included as part of Chapter 4:</p>
+<ul class="simple">
+<li><p>Root node</p></li>
+<li><p>/options/upl-params</p></li>
+<li><p>/options/upl-image&#64;</p></li>
+<li><p>/options/upl-image/image&#64;</p></li>
+<li><p>pci</p></li>
+<li><p>isa</p></li>
+<li><p>serial console decice</p></li>
+<li><p>framebuffer</p></li>
+<li><p>chosen</p></li>
+<li><p>/options/upl-custom</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0.8</p></td>
 <td><p>2023-AUG-28</p></td>
 <td><p>Initial pre-release version with basic document
 framework. These sections have been published:</p>
@@ -426,6 +445,10 @@ U-Boot</p></td>
 <div class="citation" id="fitspec" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>FITspec<span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://github.com/open-source-firmware/flat-image-tree/releases/tag/v0.8">Flat Image Tree Specification Release v0.8</a></p>
+</div>
+<div class="citation" id="pcibusbinding" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PCIBusBinding<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.openfirmware.info/data/docs/bus.pci.pdf">IEEE Std 1275-1994 Standard for Boot Firmware v2.1</a></p>
 </div>
 </div>
 </section>
@@ -1167,7 +1190,7 @@ indicated by omitting the “load” property in the image node. In this case,
 Platform Init chooses a suitable address and loads the Payload there.</p>
 <p>If the Payload must run at a particular address, it specifies this in the “load”
 property. Platform Init should try to honor this request. If it cannot, then the
-nly solution is to relocate the Payload. This is possible using the relocation
+only solution is to relocate the Payload. This is possible using the relocation
 information provided.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1502,13 +1525,991 @@ it needs and find out where they were loaded.</p>
 architecture, either 32 or 64 bits.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<dl class="simple">
-<dt>‘Usage’ legend for nodes: R=Required, O=Optional, OR=Optional but</dt><dd><p>Recommended, SD=See Definition</p>
-</dd>
-</dl>
+<p>Usage legend: R=Required, O=Optional, OR=Optional but Recommended,
+SD=See Definition</p>
 </div>
-<p>Many of these sections reference the Devicetree Specification <a class="reference internal" href="index.html#dtspec" id="id1"><span>[DTspec]</span></a>.</p>
-<p>TBD (Nodes)</p>
+<p>Many of these sections refer to the Devicetree Specification <a class="reference internal" href="index.html#dtspec" id="id1"><span>[DTspec]</span></a>.</p>
+<section id="standard-properties-and-property-values">
+<h3>4.1 Standard Properties and Property Values<a class="headerlink" href="#standard-properties-and-property-values" title="Link to this heading">¶</a></h3>
+<section id="property-values">
+<h4>4.1.1 Property Values<a class="headerlink" href="#property-values" title="Link to this heading">¶</a></h4>
+<p>A property value is an array of zero or more bytes that contain information
+associated with the property.</p>
+<p>Properties might have an empty value if conveying true-false information. In
+this case, the presence or absence of the property is sufficiently descriptive.</p>
+<p>Here are list of standard value types defined by the DTSpec <a class="reference internal" href="index.html#dtspec" id="id2"><span>[DTspec]</span></a>:</p>
+<div class="table-wrapper longtable docutils container" id="id11">
+<span id="property-values-table"></span><span id="property-values-table"></span><table class="longtable docutils align-default" id="id11">
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Property values</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;empty&gt;</span></code></p></td>
+<td><p>Value is empty. Used for conveying true-false information, when
+the presence or absence of the property itself is sufficiently
+descriptive.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p></td>
+<td><p>A 32-bit integer in big-endian format. Example: the 32-bit value
+0x11223344 would be represented in memory as:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>address    11
+address+1  22
+address+2  33
+address+3  44
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;u64&gt;</span></code></p></td>
+<td><p>Represents a 64-bit integer in big-endian format. Consists of
+two <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code> values where the first value contains the most
+significant bits of the integer and the second value contains
+the least significant bits.</p>
+<p>Example: the 64-bit value 0x1122334455667788 would be
+represented as two cells as: <code class="docutils literal notranslate"><span class="pre">&lt;0x11223344</span> <span class="pre">0x55667788&gt;</span></code>.</p>
+<p>The value would be represented in memory as:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  address  11
+address+1  22
+address+2  33
+address+3  44
+address+4  55
+address+5  66
+address+6  77
+address+7  88
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code></p></td>
+<td><p>Strings are printable and null-terminated. Example: the string
+“hello” would be represented in memory as:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  address  68  &#39;h&#39;
+address+1  65  &#39;e&#39;
+address+2  6c  &#39;l&#39;
+address+3  6c  &#39;l&#39;
+address+4  6f  &#39;o&#39;
+address+5  00  &#39;\0&#39;
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;prop-encoded-array&gt;</span></code></p></td>
+<td><p>Format is specific to the property. See the property definition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;phandle&gt;</span></code></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code> value. A <em>phandle</em> value is a way to reference another
+node in the devicetree. Any node that can be referenced defines
+a phandle property with a unique <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code> value. That number
+is used for the value of properties with a phandle value
+type.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;stringlist&gt;</span></code></p></td>
+<td><p>A list of <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code> values concatenated together.</p>
+<p>Example: The string list “hello”,”world” would be represented in
+memory as:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   address  68  &#39;h&#39;
+ address+1  65  &#39;e&#39;
+ address+2  6c  &#39;l&#39;
+ address+3  6c  &#39;l&#39;
+ address+4  6f  &#39;o&#39;
+ address+5  00  &#39;\0&#39;
+ address+6  77  &#39;w&#39;
+ address+7  6f  &#39;o&#39;
+ address+8  72  &#39;r&#39;
+ address+9  6c  &#39;l&#39;
+address+10  64  &#39;d&#39;
+address+11  00  &#39;\0&#39;
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="standard-properties">
+<h4>4.1.2 Standard Properties<a class="headerlink" href="#standard-properties" title="Link to this heading">¶</a></h4>
+<p><a class="reference internal" href="index.html#dtspec" id="id3"><span>[DTspec]</span></a> defines a list of standard properties that is commonly used across
+many DT nodes. Due to its enormous amount of details, please refer to <a class="reference internal" href="index.html#dtspec" id="id4"><span>[DTspec]</span></a>
+Chapter 2.3 (Standard Properties) directly for the full details of each standard
+properties.</p>
+<p>Here is a list of example standard properties:</p>
+<ul class="simple">
+<li><p>compatible</p></li>
+<li><p>model</p></li>
+<li><p>phandle</p></li>
+<li><p>status</p></li>
+<li><p>#address-cells and #size-cells</p></li>
+<li><p>reg</p></li>
+<li><p>virtual-reg</p></li>
+<li><p>ranges</p></li>
+<li><p>dma-ranges</p></li>
+</ul>
+<p>Here are the standard properties that are used for this spec:</p>
+<section id="address-cells-and-size-cells">
+<h5>4.1.2.1 #address-cells and #size-cells<a class="headerlink" href="#address-cells-and-size-cells" title="Link to this heading">¶</a></h5>
+<p>Property name: <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code>, <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code></p>
+<p>Value type: <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p>
+<p>Description:</p>
+<blockquote>
+<div><p>The <em>#address-cells</em> and <em>#size-cells</em> properties may be used in any
+device node that has children in the devicetree hierarchy and describes
+how child device nodes should be addressed. The <em>#address-cells</em>
+property defines the number of <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code> cells used to encode the address
+field in a child node’s <em>reg</em> property. The <em>#size-cells</em> property
+defines the number of <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code> cells used to encode the size field in a
+child node’s <em>reg</em> property.</p>
+<p>Here are some important notes:</p>
+<ul class="simple">
+<li><p>The <em>#address-cells</em> and <em>#size-cells</em> properties are not inherited from
+ancestors in the devicetree. They shall be explicitly defined.</p></li>
+<li><p>A spec-compliant boot program shall supply <em>#address-cells</em> and
+<em>#size-cells</em> on all nodes that have children.</p></li>
+<li><p>If missing, it should be assumed that a default value of 2 for
+<em>#address-cells</em>, and a value of 1 for <em>#size-cells</em>.</p></li>
+</ul>
+</div></blockquote>
+<p>Example:</p>
+<blockquote>
+<div><p>See the following devicetree excerpt:</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="nf">soc</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="nf">serial</span><span class="o">@</span><span class="mi">4600</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ns16550&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x4600</span><span class="w"> </span><span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">clock-frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">interrupts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0xA</span><span class="w"> </span><span class="mh">0x8</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">interrupt-parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">ipic</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In this example, the <em>#address-cells</em> and <em>#size-cells</em> properties of the
+<code class="docutils literal notranslate"><span class="pre">soc</span></code> node are both set to 1. This setting specifies that one cell is
+required to represent an address and one cell is required to represent the
+size of nodes that are children of this node.</p>
+<p>The serial device <em>reg</em> property necessarily follows this specification
+set in the parent (<code class="docutils literal notranslate"><span class="pre">soc</span></code>) node—the address is represented by a single cell
+(0x4600), and the size is represented by a single cell (0x100).</p>
+</div></blockquote>
+</section>
+<section id="reg">
+<span id="sp-reg"></span><h5>4.1.2.2 reg<a class="headerlink" href="#reg" title="Link to this heading">¶</a></h5>
+<p>Property name: <code class="docutils literal notranslate"><span class="pre">reg</span></code></p>
+<p>Property value: <code class="docutils literal notranslate"><span class="pre">&lt;prop-encoded-array&gt;</span></code> encoded as an arbitrary number of
+(<em>address</em>, <em>length</em>) pairs.</p>
+<p>Description:</p>
+<blockquote>
+<div><p>The <em>reg</em> property describes the address of the device’s resources
+within the address space defined by its parent bus. Most commonly this
+means the offsets and lengths of memory-mapped IO register blocks, but
+may have a different meaning on some bus types. Addresses in the address
+space defined by the root node are CPU real addresses.</p>
+<p>The value is a <em>&lt;prop-encoded-array&gt;</em>, composed of an arbitrary number
+of pairs of address and length, <em>&lt;address length&gt;</em>. The number of
+<em>&lt;u32&gt;</em> cells required to specify the address and length are
+bus-specific and are specified by the <em>#address-cells</em> and <em>#size-cells</em>
+properties in the parent of the device node. If the parent node
+specifies a value of 0 for <em>#size-cells</em>, the length field in the value
+of <em>reg</em> shall be omitted.</p>
+</div></blockquote>
+<p>Example:</p>
+<blockquote>
+<div><p>Suppose a device within a system-on-a-chip has two blocks of registers, a
+32-byte block at offset 0x3000 in the SOC and a 256-byte block at offset
+0xfe00. The <em>reg</em> property would be encoded as follows (assuming
+<em>#address-cells</em> and <em>#size-cells</em> values of 1):</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">reg</span> <span class="pre">=</span> <span class="pre">&lt;0x3000</span> <span class="pre">0x20</span> <span class="pre">0xfe00</span> <span class="pre">0x100&gt;;</span></code></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="ranges">
+<span id="sp-ranges"></span><h5>4.1.2.3 ranges<a class="headerlink" href="#ranges" title="Link to this heading">¶</a></h5>
+<p>Property name: <code class="docutils literal notranslate"><span class="pre">ranges</span></code></p>
+<p>Value type: <code class="docutils literal notranslate"><span class="pre">&lt;empty&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;prop-encoded-array&gt;</span></code> encoded as an arbitrary
+number of (<em>child-bus-address</em>, <em>parent-bus-address</em>, <em>length</em>) triplets.</p>
+<p>Description:</p>
+<blockquote>
+<div><p>The <em>ranges</em> property provides a means of defining a mapping or
+translation between the address space of the bus (the child address
+space) and the address space of the bus node’s parent (the parent
+address space).</p>
+<p>The format of the value of the <em>ranges</em> property is an arbitrary number
+of triplets of (<em>child-bus-address</em>, <em>parent-bus-address</em>, <em>length</em>)</p>
+<ul class="simple">
+<li><p>The <em>child-bus-address</em> is a physical address within the child bus’
+address space. The number of cells to represent the address is bus
+dependent and can be determined from the <em>#address-cells</em> of this node
+(the node in which the <em>ranges</em> property appears).</p></li>
+<li><p>The <em>parent-bus-address</em> is a physical address within the parent bus’
+address space. The number of cells to represent the parent address is
+bus dependent and can be determined from the <em>#address-cells</em> property
+of the node that defines the parent’s address space.</p></li>
+<li><p>The <em>length</em> specifies the size of the range in the child’s address space.
+The number of cells to represent the size can be determined from the
+<em>#size-cells</em> of this node (the node in which the <em>ranges</em> property
+appears).</p></li>
+</ul>
+<p>If the property is defined with an <code class="docutils literal notranslate"><span class="pre">&lt;empty&gt;</span></code> value, it specifies that the
+parent and child address space is identical, and no address translation
+is required.</p>
+<p>If the property is not present in a bus node, it is assumed that no
+mapping exists between children of the node and the parent address
+space.</p>
+</div></blockquote>
+<p>Address Translation Example:</p>
+<blockquote>
+<div><div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="nf">soc</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simple-bus&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0xe0000000</span><span class="w"> </span><span class="mh">0x00100000</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="nf">serial</span><span class="o">@</span><span class="mi">4600</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">device_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ns16550&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x4600</span><span class="w"> </span><span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">clock-frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">interrupts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0xa</span><span class="w"> </span><span class="mh">0x8</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">interrupt-parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">ipic</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">soc</span></code> node specifies a <em>ranges</em> property of</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">&lt;0x0</span> <span class="pre">0xe0000000</span> <span class="pre">0x00100000&gt;;</span></code></p>
+</div></blockquote>
+<p>This property value specifies that for a 1024 KB range of address space,
+a child node addressed at physical 0x0 maps to a parent address of
+physical 0xe0000000. With this mapping, the <code class="docutils literal notranslate"><span class="pre">serial</span></code> device node can
+be addressed by a load or store at address 0xe0004600, an offset of
+0x4600 (specified in <em>reg</em>) plus the 0xe0000000 mapping specified in
+<em>ranges</em>.</p>
+</div></blockquote>
+</section>
+<section id="dma-ranges">
+<span id="sp-dma-ranges"></span><h5>4.1.2.4 dma-ranges<a class="headerlink" href="#dma-ranges" title="Link to this heading">¶</a></h5>
+<p>Property name: <cite>dma-ranges`</cite></p>
+<p>Value type: <code class="docutils literal notranslate"><span class="pre">&lt;empty&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;prop-encoded-array&gt;</span></code> encoded as an arbitrary
+number of (<em>child-bus-address</em>, <em>parent-bus-address</em>, <em>length</em>) triplets.</p>
+<p>Description:</p>
+<blockquote>
+<div><p>The <em>dma-ranges</em> property is used to describe the direct memory access (DMA)
+structure of a memory-mapped bus whose devicetree parent can be accessed from
+DMA operations originating from the bus. It provides a means of defining a
+mapping or translation between the physical address space of the bus and the
+physical address space of the parent of the bus.</p>
+<p>The format of the value of the <em>dma-ranges</em> property is an arbitrary number
+of triplets of (<em>child-bus-address</em>, <em>parent-bus-address</em>, <em>length</em>). Each
+triplet specified describes a contiguous DMA address range.</p>
+<ul class="simple">
+<li><p>The <em>child-bus-address</em> is a physical address within the child bus’
+address space. The number of cells to represent the address is bus
+dependent and can be determined from the <em>#address-cells</em> of this node
+(the node in which the <em>dma-ranges</em> property appears).</p></li>
+<li><p>The <em>parent-bus-address</em> is a physical address within the parent bus’
+address space. The number of cells to represent the parent address is
+bus dependent and can be determined from the <em>#address-cells</em> property
+of the node that defines the parent’s address space.</p></li>
+<li><p>The <em>length</em> specifies the size of the range in the child’s address space.
+The number of cells to represent the size can be determined from the
+<em>#size-cells</em> of this node (the node in which the <em>dma-ranges</em> property
+appears).</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="upl-devicetree-nodes">
+<h3>4.2 UPL Devicetree Nodes<a class="headerlink" href="#upl-devicetree-nodes" title="Link to this heading">¶</a></h3>
+<p>Here is the list of devicetree nodes for UPL usage:</p>
+<section id="node-root-node-r">
+<h4>4.2.1 Node: / (Root Node) (R)<a class="headerlink" href="#node-root-node-r" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper docutils container" id="id12">
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Node: /</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>#address-cells</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Specifies the number of &lt;u32&gt; cells to represent the
+address in the reg property in children of root.</p></td>
+</tr>
+<tr class="row-odd"><td><p>#size-cells</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Specifies the number of &lt;u32&gt; cells to represent the
+size in the reg property in children of root.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="node-options-upl-params-r">
+<h4>4.2.2 Node: /options/upl-params (R)<a class="headerlink" href="#node-options-upl-params-r" title="Link to this heading">¶</a></h4>
+<p>These are the generic parameters / settings of the UPL payload.</p>
+<div class="table-wrapper docutils container" id="id13">
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">Table 8 </span><span class="caption-text">Node: /options/upl-params</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>compatible</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>“upl”</p></td>
+</tr>
+<tr class="row-odd"><td><p>boot-mode</p></td>
+<td><p>O</p></td>
+<td><p>string list</p></td>
+<td><p>For supporting different Payload boot flows. These influence how the payload runs. Note that this is not intended to support multiple Payloads.
+This string list is not meant to be prescriptive and only serves as an example data handoff, as long as Payload is able to recognise the value. Furthermore,
+Payload is not required to support all of the boot modes. For boot modes those are not supported by Payload, Payload can just ignore them without any specific
+actions. This property could be further refined in the future revisions.</p>
+<ul class="simple">
+<li><p>“normal” means booting with full functionality, from power off.</p></li>
+<li><p>“fast” means fast boot with no configuration change or minimal functionality.</p></li>
+<li><p>“full”, “diag” means booting with full functionality plus diagnostics functions.</p></li>
+<li><p>“default” means booting with “reset to default” flow (for example, boot from RTC battery power failure).</p></li>
+<li><p>“s4” means resuming from ACPI S4 state (resume from disk).</p></li>
+<li><p>“factory” means booting with manufacturing mode.</p></li>
+<li><p>“s3” means resuming from ACPI S3 state (resume from memory).</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>addr-width</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>52 means host address width is 52 bits. 46 means address width is 46 bits.
+This is mainly used by Payloads when initializing page tables. This can avoid the payload needing to access the SoC directly to obtain this information.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pci-enum-done</p></td>
+<td><p>O</p></td>
+<td><p>empty</p></td>
+<td><p>When pci-enum-done present, payload will skip PCI resource assignment and it will use pci-rb node information to create internal resource map to ensure no conflict
+usage of those in-used PCI resources during payload execution.</p>
+<p>When pci-enum-done not present, payload may do the PCI enumeration to assign resources basing on pci-rb node information, and could also create resource map too.</p>
+<p>In some payloads, a simple PCI enumeration may still be executed even with “pci-enum-done” to collect PCI device information and bind corresponding drivers to
+provide services and functionality.
+(for example, find out network controller and bind network driver to support network functionality)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="node-options-upl-image-addr-r">
+<h4>4.2.3 Node: /options/upl-image&#64;&lt;addr&gt; (R)<a class="headerlink" href="#node-options-upl-image-addr-r" title="Link to this heading">¶</a></h4>
+<p>The behavior of Platform Init when loading a FIT cannot always be known at build
+time. For example:</p>
+<ul class="simple">
+<li><p>Platform Init may select one of several configurations when loading the
+Payload; the configuration chosen may depend on the hardware that it is
+running on</p></li>
+<li><p>Platform Init may load images to any address if there is no ‘load’ property in
+the image.</p></li>
+</ul>
+<p>The Payload may need to know where one of the images ended up in memory, or
+which configuration was chosen. It cannot find this out by itself. The
+‘image’ node provides information to help with these problems.</p>
+<div class="table-wrapper docutils container" id="id14">
+<table class="docutils align-default" id="id14">
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">Node: /options/upl-images&#64;&lt;addr&gt;</span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>reg</p></td>
+<td><p>SD</p></td>
+<td><p>prop-encoded array</p></td>
+<td><p>Address and size of FIT image that was loaded and executed to reach this point. This is required if the Payload must have access to the FIT to operate, e.g., if
+Platform Init does not load the images to a new address. Otherwise, it is optional.</p></td>
+</tr>
+<tr class="row-odd"><td><p>conf-offset</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>Offset within FIT of the configuration node that was selected.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="node-options-upl-image-image-addr-o">
+<h4>4.2.4 Node: /options/upl-image/image&#64;&lt;addr&gt; (O)<a class="headerlink" href="#node-options-upl-image-image-addr-o" title="Link to this heading">¶</a></h4>
+<p>This node is only required if Platform Init loaded the images to different
+addresses. In the case where the FIT is used in-place, this is not needed.</p>
+<p>The name of this node must match the name of the corresponding image node in the
+FIT. This provides information about the loaded images.</p>
+<p>Each loaded image has a separate node created with the following properties:</p>
+<div class="table-wrapper docutils container" id="id15">
+<table class="docutils align-default" id="id15">
+<caption><span class="caption-number">Table 10 </span><span class="caption-text">/options/upl-image/image&#64;&lt;addr&gt;</span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>reg</p></td>
+<td><p>R</p></td>
+<td><p>prop-encoded array</p></td>
+<td><p>Address and size that the image was actually loaded to. This is normally the same as the image load address within the FIT, but can be different if anything was
+relocated, or if the FIT did not provide a load address.</p></td>
+</tr>
+<tr class="row-odd"><td><p>offset</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>Offset within FIT of the image node for this image.</p></td>
+</tr>
+<tr class="row-even"><td><p>description</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>Description value for this image from the FIT.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="node-pci-r">
+<h4>4.2.5 Node: /pci (R)<a class="headerlink" href="#node-pci-r" title="Link to this heading">¶</a></h4>
+<p>Payload may need below FDT nodes for collecting PCI devices information on the
+system for binding corresponding drivers to provide services and functionality.</p>
+<p>There could be 2 or more root bridge nodes and even the same PCI segment may be
+shared by several root bridges. In this case ecam-base-addr in the PCI root
+bridge node is important for payload to know how to access each root bridge as
+well as what segment they belong to. (by masking bus/dev/func, the same
+ecam-base-addr will be the same segment root bridges).</p>
+<p>Under each root bridge node, there could be several root ports and/or PCI
+devices listed as its child nodes. Please refer the example use case below for
+reference implementation.</p>
+<p>The PCI bindings in this node must follow this specification - the IEEE Std
+1275-1994 Standard for Boot (Initialization Configuration) Firmware
+<a class="reference internal" href="index.html#pcibusbinding" id="id5"><span>[PCIBusBinding]</span></a> with some restrictions.</p>
+<p>As the #address-cells is always 3, the child / PCI address has to be presented
+in this format, <strong>per PCI Bus Binding spec</strong> <a class="reference internal" href="index.html#pcibusbinding" id="id6"><span>[PCIBusBinding]</span></a>:</p>
+<ul class="simple">
+<li><p>The non-prefetchable and prefetchable memory windows must each be exactly
+256MB (0x10000000) in size.</p></li>
+<li><p>The prefetchable memory window must be immediately adjacent to the
+non-prefetcable memory window.</p></li>
+</ul>
+<p>Here is a bitmap of the 3-cell address which is followed by the explanation of
+each bit:</p>
+<ul class="simple">
+<li><p>Cell 1: npt000ss bbbbbbbb dddddfff rrrrrrrr</p></li>
+<li><p>Cell 2: hhhhhhhh hhhhhhhh hhhhhhhh hhhhhhhh</p></li>
+<li><p>Cell 3: llllllll llllllll llllllll llllllll</p></li>
+</ul>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>n: 0 if the address is relocatable, 1 otherwise</p></li>
+<li><p>p: 1 if the addressable region is “prefetchable”, 0 otherwise</p></li>
+<li><p>t: 1 if the address is aliased (for non-relocatable I/O), below 1 MB (for
+Memory), or below 64 KB (for relocatable I/O)</p></li>
+<li><p>ss: space code</p>
+<ul>
+<li><p>00: configuration space</p></li>
+<li><p>01: I/O space</p></li>
+<li><p>10: 32 bit memory space</p></li>
+<li><p>11: 64 bit memory space</p></li>
+</ul>
+</li>
+<li><p>bbbbbbbb: The PCI bus number</p></li>
+<li><p>ddddd: The device number</p></li>
+<li><p>fff: The function number</p></li>
+<li><p>rrrrrrrr: Register number. Not used.</p></li>
+</ul>
+<div class="table-wrapper longtable colwidths-auto docutils container" id="id16">
+<table class="longtable docutils align-default" id="id16">
+<caption><span class="caption-number">Table 11 </span><span class="caption-text">/pci/&lt;pci-device&gt;&#64;&lt;ecam-base-address&gt;</span><a class="headerlink" href="#id16" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>compatible</p></td>
+<td><p>R</p></td>
+<td><p>string list</p></td>
+<td><p>To determine what kind of driver should be applied to the device. It should be in the form of &lt;manufacturer&gt;,&lt;model&gt;. But for historical reason,
+&lt;model&gt; alone also works for common used devices. For this spec, ‘pci-rb’ is recommended to specify it is a PCI root brige node.</p></td>
+</tr>
+<tr class="row-odd"><td><p>#address-cells</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Indicates the number of cells used in addresses in the handoff.</p>
+<p>Per PCI Bus Binding spec <a class="reference internal" href="index.html#pcibusbinding" id="id7"><span>[PCIBusBinding]</span></a>, <strong>this value must be 3</strong>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>#size-cells</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Indicates the number of cells used for sizes in the handoff.</p>
+<p>Per PCI Bus Binding spec <a class="reference internal" href="index.html#pcibusbinding" id="id8"><span>[PCIBusBinding]</span></a>, <strong>this value must be 2</strong>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>bus-range</p></td>
+<td><p>SD</p></td>
+<td><p>prop-encoded-array</p></td>
+<td><p>Contains 2 cells, each encoded as with encode-int, the first representing the loweest bus number of the PCI bus implemented by the bus controller
+represented by this node (the secondary bus number in PCI-to-PCI bridge nomenclature), and the second representing the largest bus number of any
+PCI bus in the portion of the PCI domain that is subordinate to this node (the subordinate bus number in PCI-to-PCI bridge nomenclature).</p>
+<p>This is required for Payload to do a simple PCI scan to build a PCI device database for providing functionality/service drivers (graphics, USB,
+SATA…)</p>
+<p>This property is mandatory for a PCI root bridge node.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>reg</p></td>
+<td><p>R</p></td>
+<td><p>prop-encoded-array</p></td>
+<td><p>Refer to here for generic definition: <a class="reference internal" href="#sp-reg"><span class="std std-ref">4.1.2.2 reg</span></a></p>
+<p>Indicates an address range that are used by the PCI devices under the current bridge. It is a range that the CPU (parent bus) can access. The
+form of reg is &lt;[address1 size1] [address2 size2] [address3 size3] …&gt;. As the reg data presents the address range in the parent memory space,
+so it is the parent’s cell count of address and size used.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ranges</p></td>
+<td><p>SD</p></td>
+<td><p>prop-encoded-array
+or empty</p></td>
+<td><p>Refer to here for generic definition: <a class="reference internal" href="#sp-ranges"><span class="std std-ref">4.1.2.3 ranges</span></a></p>
+<p>For this node, ranges data is in the form of PCI address, CPU address, PCI size. The cells of PCI address is the value of #address-cells in PCI
+node (3). The cells of CPU address is the value of #address-cells in the parent node. The cells of PCI size is the value of #size-cells in PCI
+node (2).</p>
+<p>The data is used to define IO, prefetchable/non-prefetchable MMIO resources that can be utilized for the root bridge which can be assigned to
+downstream devices.</p>
+<p>The ranges include those MMIO or IO which are already assigned to downstream devices and available for future new devices.</p>
+<p>If the property is defined with an &lt;empty&gt; value, it specifies that the parent and child address space is identical, and no address translation is required.</p>
+<p>If the property is not present in a bus node, it is assumed that no mapping exists between children of the node and the parent address space.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>dma-ranges</p></td>
+<td><p>O</p></td>
+<td><p>prop-encoded-array
+or empty</p></td>
+<td><p>Refer to here for generic definition: <a class="reference internal" href="#sp-dma-ranges"><span class="std std-ref">4.1.2.4 dma-ranges</span></a></p>
+<p>Define the DMA address width capability of the root bridge. If only below 4GB region was defined, the payload may assume above 4GB DMA is not
+supported.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An example showing multiple top-level PCI nodes each with its own bus range:</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="c1">//1st pci-rb in its separate segment of PCIEXBAR 0xC0000000</span>
+<span class="nf">pci-rb0</span><span class="o">@</span><span class="mi">c0000000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci-rb&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">bus-range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x01</span><span class="w"> </span><span class="mh">0xdf</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0xc0000000</span><span class="w"> </span><span class="mh">0x1</span><span class="w"> </span><span class="mh">0x0000000</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// whole ECAM region in this root bridge</span>
+<span class="w">   </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="c1">//several root ports</span>
+<span class="w">   </span><span class="c1">//properties</span>
+<span class="p">};</span>
+
+<span class="c1">// 2nd pci-rb in the shared segment base of PCIEXBAR 0xE0000000</span>
+<span class="nf">pci-rb1</span><span class="o">@</span><span class="mi">e0000000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci-rb&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">bus-range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x24</span><span class="w"> </span><span class="mh">0x4b</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0xe0000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x8000000</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">//whole ECAM region in this root bridge</span>
+
+<span class="w">   </span><span class="c1">//non-reloc/non-prefetch/mmio, child-addr, parent-addr, length</span>
+<span class="w">   </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x82000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x92000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x92000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x10BC0000</span>
+
+<span class="w">   </span><span class="c1">//non-reloc/non-prefetch/mmio, child-addr, parent-addr, length</span>
+<span class="w">   </span><span class="mh">0x82000000</span><span class="w"> </span><span class="mh">0x2040</span><span class="w"> </span><span class="mh">0x00000000</span><span class="w"> </span><span class="mh">0x2040</span><span class="w"> </span><span class="mh">0x00000000</span><span class="w"> </span><span class="mh">0x1</span><span class="w"> </span><span class="mh">0x40000000</span>
+
+<span class="w">   </span><span class="c1">//non-reloc/32bit/io, child-addr, parent-addr, length</span>
+<span class="w">   </span><span class="mh">0x81000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x4000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x4000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x2000</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">//non-reloc/non-prefetch/memory, child-addr, parent-addr, length</span>
+<span class="w">   </span><span class="c1">//indicate rb1 does not support above 4GB DMA</span>
+<span class="w">   </span><span class="kr">dma-ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x82000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x1</span><span class="w"> </span><span class="mh">0x0</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0 ~ 4GB</span>
+
+<span class="w">   </span><span class="c1">//first root port is B0:D0:F0</span>
+<span class="w">   </span><span class="nf">rootport0</span><span class="o">@</span><span class="mi">0,0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="cm">/* MMIO, IO resource assigned to this root port that can be consumed by</span>
+<span class="cm">      its downstream devices. */</span>
+<span class="w">      </span><span class="kr">ranges</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="cm">/* The 3rd pci-rb in the shared segment base of PCIEXBAR 0xE0000000 (starting</span>
+<span class="cm">from 0xE8000000) */</span>
+<span class="nf">pci-rb2</span><span class="o">@</span><span class="mi">e8000000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci-rb&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">bus-range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x81</span><span class="w"> </span><span class="mh">0xc8</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0xe8000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x8000000</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">//whole ECAM region in this root bridge</span>
+<span class="w">   </span><span class="c1">//MMIO, IO resource owned by this root bridge</span>
+<span class="w">   </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">//non-reloc/non-prefetch/memory, child-addr, parent-addr, length</span>
+<span class="w">   </span><span class="c1">//indicate rb2 does not support above 4GB DMA</span>
+<span class="w">   </span><span class="kr">dma-ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x82000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x1</span><span class="w"> </span><span class="mh">0x0</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0 ~ 4GB</span>
+
+<span class="w">   </span><span class="c1">//first root port is B128: D0: F0</span>
+<span class="w">   </span><span class="nf">rootport0</span><span class="o">@</span><span class="mi">0,0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="cm">/* MMIO, IO resource assigned to this root port that can be consumed by</span>
+<span class="cm">      its downstream devices. */</span>
+<span class="w">      </span><span class="kr">ranges</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="node-isa-o">
+<h4>4.2.6 Node: /isa (O)<a class="headerlink" href="#node-isa-o" title="Link to this heading">¶</a></h4>
+<p>There are different kinds of buses each using their own addressing scheme. Among
+them are usually memory addresses, legacy I/O Ports and PCIe. In summary
+one needs to surround the node using legacy I/O ports with a “isa” bus node.</p>
+<p>For clarification, this node can be used for LPC and eSPI devices, as from
+software pespective, both are ISA compatible.</p>
+<div class="table-wrapper docutils container" id="id17">
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-number">Table 12 </span><span class="caption-text">Node: /isa</span><a class="headerlink" href="#id17" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>compatible</p></td>
+<td><p>R</p></td>
+<td><p>string       “isa”</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>#address-cells</p></td>
+<td><p>R</p></td>
+<td><p>u32          2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>#size-cells</p></td>
+<td><p>R</p></td>
+<td><p>u32          1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ranges</p></td>
+<td><p>SD</p></td>
+<td><p>prop-encoded-array
+or empty</p></td>
+<td><p>Refer to here for generic definition:
+<a class="reference internal" href="#sp-ranges"><span class="std std-ref">4.1.2.3 ranges</span></a></p>
+<p>Required for memory accesses or memory mapped
+I/O space. Optional if only indirect I/O is
+supported. Not required for legacy I/O.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Specific legacy I/O devices are descirbed in child nodes. For UPL usage, only
+serial console is supported for now - further legacy I/O devices can be expended
+later if required. Please refer to <a class="reference internal" href="#serial-console"><span class="std std-ref">4.2.7 Node: Serial Console Device (SD)</span></a> for serial console use
+cases.</p>
+<p>For its child node, ‘reg’ property is required, and it is in the format of:
+&lt;(enum) (address) (size)&gt;; and here is the usage for the <cite>enum</cite>:
+* 0x0   # memory address
+* 0x1   # I/O address</p>
+</section>
+<section id="node-serial-console-device-sd">
+<span id="serial-console"></span><h4>4.2.7 Node: Serial Console Device (SD)<a class="headerlink" href="#node-serial-console-device-sd" title="Link to this heading">¶</a></h4>
+<p>This refers to the debug / log console, where Payload can setup and use the same
+UART controller as Platform Init for seamless debug output. There can be more
+than one UART controller defined, and the ‘/chosen’ node must include a
+‘stdout-path’ property pointing to this device when it is used, as per
+<a class="reference internal" href="index.html#dtspec" id="id9"><span>[DTspec]</span></a>.</p>
+<p>This node is mandatory if a serial device is available and initialized by
+Platform Init.</p>
+<div class="table-wrapper docutils container" id="id18">
+<table class="docutils align-default" id="id18">
+<caption><span class="caption-number">Table 13 </span><span class="caption-text">Node: serial&#64;&lt;addr&gt;</span><a class="headerlink" href="#id18" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>compatible</p></td>
+<td><p>R</p></td>
+<td><p>string list</p></td>
+<td><p>Compatible string for hardware.
+Currently, these compatible strings are supported:
+ns16550a, ns16550, ns8250, ns16450</p></td>
+</tr>
+<tr class="row-odd"><td><p>clock-frequency</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Frequency (in Hz) of the baud rate generator’s input clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>current-speed</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>Current serial device speed in bits per second.</p></td>
+</tr>
+<tr class="row-odd"><td><p>reg</p></td>
+<td><p>R</p></td>
+<td><p>prop-encoded-array</p></td>
+<td><p>Physical address of the registers device within the address space of the parent. The form of reg is
+&lt;[address] [size]&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>reg-shift</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>log2 of distance between the discrete device registers. If unspecified, the default value is 0, meaning 1 byte apart.</p></td>
+</tr>
+<tr class="row-odd"><td><p>reg-offset</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>Offset of the registers from the base address. The default value is 0, meaning no offset.</p></td>
+</tr>
+<tr class="row-even"><td><p>reg-io-width</p></td>
+<td><p>O</p></td>
+<td><p>u32</p></td>
+<td><p>Register width in bytes. Valid values are 1, 2 and 4. The default value is 1, meaning byte width.</p></td>
+</tr>
+<tr class="row-odd"><td><p>virtual-reg</p></td>
+<td><p>SD</p></td>
+<td><p>u32 or u64</p></td>
+<td><p>Specifies an effective address that maps to the first physical address specified in the reg property. This property is
+required if this device node is the system’s console.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Example below shows a legacy I/O serial device and an MMIO serial device:</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="c1">// Legacy I/O serial device</span>
+<span class="nf">isa</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;isa&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="nf">serial</span><span class="o">@</span><span class="mi">3f8</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ns16550&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">reg</span><span class="o">-</span><span class="n">io-width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1</span><span class="w"> </span><span class="mh">0x3f8</span><span class="w"> </span><span class="mi">8</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">clock-frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x1c2000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">current-speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">115200</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// MMIO serial device</span>
+<span class="nf">serial</span><span class="o">@</span><span class="mi">fe037000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ns16550a&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="o">-</span><span class="n">io-width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cp">/bits 64/</span><span class="cm"> </span><span class="cp">&lt;0xfe037000 0x80&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">clock-frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x1c2000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">current-speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1500000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Another example showing an MMIO serial device under PCI node:</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="nf">pci-rb0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">...</span>
+<span class="w">   </span><span class="nf">serial</span><span class="o">@</span><span class="mi">fe037000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ns16550a&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">reg</span><span class="o">-</span><span class="n">io-width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">//non-prefetchable, non-relocable, non-aliased 32bit MMIO</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x82000000</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mh">0xfe037000</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mh">0x80</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">clock-frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x1c2000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">current-speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1500000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="node-framebuffer-for-display-sd">
+<h4>4.2.8 Node: framebuffer (for Display) (SD)<a class="headerlink" href="#node-framebuffer-for-display-sd" title="Link to this heading">¶</a></h4>
+<p>Normally only one framebuffer is provided in the handoff. It should be the
+‘primary’ one (if such a concept exists in the system) and visible to the user.
+A ‘display0’ alias should provide the full path to the device. Where the device
+itself is not represented in the devicetree, the ‘display0’ alias should point
+to the simple-framebuffer node.</p>
+<p>Look at the display0 alias. If this is a simple-framebuffer, then use that
+If not, search for a node with the “simple-framebuffer” compatible string, which
+has a ‘display’ property matching the display0 alias.</p>
+<p>Note: If more than one framebuffer/ display device exist, the stdout-path in
+‘chosen’ node must point to the freamebuffer node preferred to be used by the
+payload (in the case that only a single display output is supported by payload).</p>
+<div class="table-wrapper docutils container" id="id19">
+<table class="docutils align-default" id="id19">
+<caption><span class="caption-number">Table 14 </span><span class="caption-text">Node: framebuffer&#64;&lt;addr&gt;</span><a class="headerlink" href="#id19" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>compatible</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>simple-framebuffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>reg</p></td>
+<td><p>R</p></td>
+<td><p>prop-encoded-array</p></td>
+<td><p>Graphic frame buffer’s base address and size.</p></td>
+</tr>
+<tr class="row-even"><td><p>width</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>pixels in the X dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p>height</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>pixels in the Y dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p>stride</p></td>
+<td><p>R</p></td>
+<td><p>u32</p></td>
+<td><p>bytes per line of pixels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>format</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><ul class="simple">
+<li><p><cite>a8b8g8r8</cite> - 32-bit pixels, d[31:24]=a, d[23:16]=b, d[15:8]=g, d[7:0]=r</p></li>
+<li><p><cite>a8r8g8b8</cite> - 32-bit pixels, d[31:24]=a, d[23:16]=r, d[15:8]=g, d[7:0]=b</p></li>
+<li><p><cite>a16b16g16r16</cite> - 64-bit pixels, d[63:48]=a, d[47:32]=r, d[31:16]=g, d[15:0]=b</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>display</p></td>
+<td><p>R</p></td>
+<td><p>string</p></td>
+<td><p>Point to the PCI graphics device which provides this framebuffer as the primary display device.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Example below shows how framebuffer node is generated:</p>
+<p>Example 1 (non-PCI):</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="c1">// Optional alias</span>
+<span class="nf">aliases</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">display0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">framebuffer0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nl">framebuffer0</span><span class="p">:</span><span class="w"> </span><span class="nf">framebuffer</span><span class="o">@</span><span class="mi">b0000000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simple-framebuffer&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0xb0000000</span><span class="w"> </span><span class="mh">0x040</span><span class="w"> </span><span class="mh">0x500000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1280</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">1024</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a8r8g8b8&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Example 2: (PCI)</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="c1">// Optional alias</span>
+<span class="nf">aliases</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">display0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gma</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nf">pcie</span><span class="o">@</span><span class="mi">10000000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci-host-ecam-generic&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span>
+<span class="w">   </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="nf">pcie</span><span class="o">@</span><span class="mi">8</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="cm">/* Root port 00:01.0 */</span>
+<span class="w">      </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x00000800</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="nl">gma</span><span class="p">:</span><span class="w"> </span><span class="nf">gma</span><span class="o">@</span><span class="mi">2,0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="cm">/* gfx device 01:00.0 */</span>
+<span class="w">         </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x00010000</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="nf">framebuffer</span><span class="o">@</span><span class="mi">b0000000</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simple-framebuffer&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0xb0000000</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// or use the BAR to access the framebuffer</span>
+<span class="w">   </span><span class="c1">// these likely come from EDID talking to the panel</span>
+<span class="w">   </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3840</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2160</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a8r8g8b8&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">gma</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="node-chosen-r">
+<h4>4.2.9 Node: chosen (R)<a class="headerlink" href="#node-chosen-r" title="Link to this heading">¶</a></h4>
+<p>For details about chosen node, please refer to <a class="reference internal" href="index.html#dtspec" id="id10"><span>[DTspec]</span></a> Chapter 3.6 for the
+chosen node usage. For the UPL usecase, please refer to the example below:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this case the stdout is printed to two serial ports and one graphical
+framebuffer simultaneously.</p>
+</div>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="nf">chosen</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">bootargs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;root=/dev/nfs rw nfsroot=192.168.1.1 console=ttyS0,115200&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">stdout-path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/soc/serial0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/soc/serial1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/soc/framebuffer1&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="node-options-upl-custom-o">
+<h4>4.2.9 Node: /options/upl-custom (O)<a class="headerlink" href="#node-options-upl-custom-o" title="Link to this heading">¶</a></h4>
+<p>Since the firmware sometimes might require additional/ customized information to
+be passed in due to some very specific use cases (for example, the vendor might
+add specific data to be consumed by Payload for specific setup or driver use
+cases like Intel CSME Features), hence custom nodes are allowed here for the
+flexibility. If the node data becomes common or popular enough in the future,
+we can create a separate node later for that node data.</p>
+</section>
+</section>
 </section>
 </div>
 </section>
