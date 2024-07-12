@@ -70,7 +70,7 @@ initializes the system hardware and the Payload phase. It includes how to format
 and pass parameters to the Payload, Payload image format, Payload boot mode and
 stack usage, register settings etc. The intent for this specification is to
 provide interoperability between spec-compliant Platform Init stage and spec
-compliant Payload stage. This can also allows Payloads to be distributed
+compliant Payload stage. This can also allow Payloads to be distributed
 independently of the board firmware.
 
 .. figure:: _images/upl-bootflow.png
