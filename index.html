@@ -517,7 +517,7 @@ initializes the system hardware and the Payload phase. It includes how to format
 and pass parameters to the Payload, Payload image format, Payload boot mode and
 stack usage, register settings etc. The intent for this specification is to
 provide interoperability between spec-compliant Platform Init stage and spec
-compliant Payload stage. This can also allows Payloads to be distributed
+compliant Payload stage. This can also allow Payloads to be distributed
 independently of the board firmware.</p>
 <figure class="align-center">
 <img alt="Universal Payload bootflow from Platfrom Init to OS" src="_images/upl-bootflow.png" />
@@ -1547,9 +1547,9 @@ associated with the property.</p>
 <p>Properties might have an empty value if conveying true-false information. In
 this case, the presence or absence of the property is sufficiently descriptive.</p>
 <p>Here are list of standard value types defined by the DTSpec <a class="reference internal" href="index.html#dtspec" id="id2"><span>[DTspec]</span></a>:</p>
-<div class="table-wrapper longtable docutils container" id="id11">
-<span id="property-values-table"></span><span id="property-values-table"></span><table class="longtable docutils align-default" id="id11">
-<caption><span class="caption-number">Table 6 </span><span class="caption-text">Property values</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
+<div class="table-wrapper longtable docutils container" id="id12">
+<span id="property-values-table"></span><span id="property-values-table"></span><table class="longtable docutils align-default" id="id12">
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Property values</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Value</p></th>
 <th class="head"><p>Description</p></th>
@@ -1667,7 +1667,7 @@ properties.</p>
 </ul>
 <p>Here are the standard properties that are used for this spec:</p>
 <section id="address-cells-and-size-cells">
-<h5>4.1.2.1 #address-cells and #size-cells<a class="headerlink" href="#address-cells-and-size-cells" title="Link to this heading">¶</a></h5>
+<span id="sp-acsc"></span><h5>4.1.2.1 #address-cells and #size-cells<a class="headerlink" href="#address-cells-and-size-cells" title="Link to this heading">¶</a></h5>
 <p>Property name: <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code>, <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code></p>
 <p>Value type: <code class="docutils literal notranslate"><span class="pre">&lt;u32&gt;</span></code></p>
 <p>Description:</p>
@@ -1849,9 +1849,9 @@ appears).</p></li>
 <p>Here is the list of devicetree nodes for UPL usage:</p>
 <section id="node-root-node-r">
 <h4>4.2.1 Node: / (Root Node) (R)<a class="headerlink" href="#node-root-node-r" title="Link to this heading">¶</a></h4>
-<div class="table-wrapper docutils container" id="id12">
-<table class="docutils align-default" id="id12">
-<caption><span class="caption-number">Table 7 </span><span class="caption-text">Node: /</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id13">
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Node: /</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property</p></th>
 <th class="head"><p>Usage</p></th>
@@ -1879,9 +1879,9 @@ size in the reg property in children of root.</p></td>
 <section id="node-options-upl-params-r">
 <h4>4.2.2 Node: /options/upl-params (R)<a class="headerlink" href="#node-options-upl-params-r" title="Link to this heading">¶</a></h4>
 <p>These are the generic parameters / settings of the UPL payload.</p>
-<div class="table-wrapper docutils container" id="id13">
-<table class="docutils align-default" id="id13">
-<caption><span class="caption-number">Table 8 </span><span class="caption-text">Node: /options/upl-params</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id14">
+<table class="docutils align-default" id="id14">
+<caption><span class="caption-number">Table 8 </span><span class="caption-text">Node: /options/upl-params</span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property</p></th>
 <th class="head"><p>Usage</p></th>
@@ -1948,9 +1948,9 @@ the image.</p></li>
 <p>The Payload may need to know where one of the images ended up in memory, or
 which configuration was chosen. It cannot find this out by itself. The
 ‘image’ node provides information to help with these problems.</p>
-<div class="table-wrapper docutils container" id="id14">
-<table class="docutils align-default" id="id14">
-<caption><span class="caption-number">Table 9 </span><span class="caption-text">Node: /options/upl-images&#64;&lt;addr&gt;</span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id15">
+<table class="docutils align-default" id="id15">
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">Node: /options/upl-images&#64;&lt;addr&gt;</span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property</p></th>
 <th class="head"><p>Usage</p></th>
@@ -1981,9 +1981,9 @@ addresses. In the case where the FIT is used in-place, this is not needed.</p>
 <p>The name of this node must match the name of the corresponding image node in the
 FIT. This provides information about the loaded images.</p>
 <p>Each loaded image has a separate node created with the following properties:</p>
-<div class="table-wrapper docutils container" id="id15">
-<table class="docutils align-default" id="id15">
-<caption><span class="caption-number">Table 10 </span><span class="caption-text">/options/upl-image/image&#64;&lt;addr&gt;</span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id16">
+<table class="docutils align-default" id="id16">
+<caption><span class="caption-number">Table 10 </span><span class="caption-text">/options/upl-image/image&#64;&lt;addr&gt;</span><a class="headerlink" href="#id16" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2061,9 +2061,9 @@ Memory), or below 64 KB (for relocatable I/O)</p></li>
 <li><p>fff: The function number</p></li>
 <li><p>rrrrrrrr: Register number. Not used.</p></li>
 </ul>
-<div class="table-wrapper longtable colwidths-auto docutils container" id="id16">
-<table class="longtable docutils align-default" id="id16">
-<caption><span class="caption-number">Table 11 </span><span class="caption-text">/pci/&lt;pci-device&gt;&#64;&lt;ecam-base-address&gt;</span><a class="headerlink" href="#id16" title="Link to this table">¶</a></caption>
+<div class="table-wrapper longtable colwidths-auto docutils container" id="id17">
+<table class="longtable docutils align-default" id="id17">
+<caption><span class="caption-number">Table 11 </span><span class="caption-text">/pci/&lt;pci-device&gt;&#64;&lt;ecam-base-address&gt;</span><a class="headerlink" href="#id17" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2217,9 +2217,9 @@ them are usually memory addresses, legacy I/O Ports and PCIe. In summary
 one needs to surround the node using legacy I/O ports with a “isa” bus node.</p>
 <p>For clarification, this node can be used for LPC and eSPI devices, as from
 software pespective, both are ISA compatible.</p>
-<div class="table-wrapper docutils container" id="id17">
-<table class="docutils align-default" id="id17">
-<caption><span class="caption-number">Table 12 </span><span class="caption-text">Node: /isa</span><a class="headerlink" href="#id17" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id18">
+<table class="docutils align-default" id="id18">
+<caption><span class="caption-number">Table 12 </span><span class="caption-text">Node: /isa</span><a class="headerlink" href="#id18" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2230,18 +2230,18 @@ software pespective, both are ISA compatible.</p>
 <tbody>
 <tr class="row-even"><td><p>compatible</p></td>
 <td><p>R</p></td>
-<td><p>string       “isa”</p></td>
-<td></td>
+<td><p>string</p></td>
+<td><p>“isa”</p></td>
 </tr>
 <tr class="row-odd"><td><p>#address-cells</p></td>
 <td><p>R</p></td>
-<td><p>u32          2</p></td>
-<td></td>
+<td><p>u32</p></td>
+<td><p>2</p></td>
 </tr>
 <tr class="row-even"><td><p>#size-cells</p></td>
 <td><p>R</p></td>
-<td><p>u32          1</p></td>
-<td></td>
+<td><p>u32</p></td>
+<td><p>1</p></td>
 </tr>
 <tr class="row-odd"><td><p>ranges</p></td>
 <td><p>SD</p></td>
@@ -2275,9 +2275,9 @@ than one UART controller defined, and the ‘/chosen’ node must include a
 <a class="reference internal" href="index.html#dtspec" id="id9"><span>[DTspec]</span></a>.</p>
 <p>This node is mandatory if a serial device is available and initialized by
 Platform Init.</p>
-<div class="table-wrapper docutils container" id="id18">
-<table class="docutils align-default" id="id18">
-<caption><span class="caption-number">Table 13 </span><span class="caption-text">Node: serial&#64;&lt;addr&gt;</span><a class="headerlink" href="#id18" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id19">
+<table class="docutils align-default" id="id19">
+<caption><span class="caption-number">Table 13 </span><span class="caption-text">Node: serial&#64;&lt;addr&gt;</span><a class="headerlink" href="#id19" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2390,9 +2390,9 @@ has a ‘display’ property matching the display0 alias.</p>
 <p>Note: If more than one framebuffer/ display device exist, the stdout-path in
 ‘chosen’ node must point to the freamebuffer node preferred to be used by the
 payload (in the case that only a single display output is supported by payload).</p>
-<div class="table-wrapper docutils container" id="id19">
-<table class="docutils align-default" id="id19">
-<caption><span class="caption-number">Table 14 </span><span class="caption-text">Node: framebuffer&#64;&lt;addr&gt;</span><a class="headerlink" href="#id19" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id20">
+<table class="docutils align-default" id="id20">
+<caption><span class="caption-number">Table 14 </span><span class="caption-text">Node: framebuffer&#64;&lt;addr&gt;</span><a class="headerlink" href="#id20" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2525,9 +2525,9 @@ system. If a system has multiple ranges of memory, multiple memory nodes can
 be created, or the ranges can be specified in the reg property of a single
 memory node. See the Devicetree Specification (“/memory node” section) for
 details.</p>
-<div class="table-wrapper docutils container" id="id20">
-<table class="docutils align-default" id="id20">
-<caption><span class="caption-number">Table 15 </span><span class="caption-text">Node: memory&#64;&lt;base_address&gt;</span><a class="headerlink" href="#id20" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id21">
+<table class="docutils align-default" id="id21">
+<caption><span class="caption-number">Table 15 </span><span class="caption-text">Node: memory&#64;&lt;base_address&gt;</span><a class="headerlink" href="#id21" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2625,24 +2625,31 @@ memory@1000000000 {
 </section>
 <section id="node-reserved-memory-r">
 <h4>4.2.12 Node: reserved-memory (R)<a class="headerlink" href="#node-reserved-memory-r" title="Link to this heading">¶</a></h4>
-<p>Both the reserved memory description models, namely simple descriptor (Memory
-Reservation Block) and standard descriptor (reserved memory node) are supported
-to provide information about memory which is not available for use. Payload shall
-exclude reserved memory from normal usage.</p>
+<p>Both the reserved memory description models, namely <strong>simple descriptor (Memory
+Reservation Block)</strong> and <strong>standard descriptor (reserved memory node)</strong> are
+supported to provide information about memory which is not available for use.
+Payload shall exclude reserved memory from normal usage.</p>
 <p>If Memory Reservation Block is used, payload is free to chose default attributes
 it wants to assign to this block. What is guaranteed is that this memory will be
-provided to OS as “reserved” memory. No memory optimisations (such as reclaim etc.)
-will be possible. On the other hand, standard reserved memory node will provide
-better control over memory range handling in firmware.</p>
-<p>For further information on Memory Reservation Block, please refer to [DTspec]
+provided to OS as “reserved” memory. No memory optimisations (such as reclaim
+etc.) will be possible. On the other hand, standard reserved memory node will
+provide better control over memory range handling in firmware.</p>
+<p>For further information on Memory Reservation Block, please refer to <a class="reference internal" href="index.html#dtspec" id="id11"><span>[DTspec]</span></a>
 Chapter 5.3.</p>
 <p>Here are the table description for standard reserved memory node. One can create
 child nodes describing particular reserved (excluded from normal use) memory
-regions. Such memory regions are usually designed for the special usage by various
-device drivers.</p>
-<div class="table-wrapper docutils container" id="id21">
-<table class="docutils align-default" id="id21">
-<caption><span class="caption-number">Table 16 </span><span class="caption-text">Node: reserved-memory</span><a class="headerlink" href="#id21" title="Link to this table">¶</a></caption>
+regions. Such memory regions are usually designed for the special usage by
+various device drivers.</p>
+<p>Each child of the reserved-memory node specifies one or more regions of reserved
+memory. Each child node may either use a ‘reg’ property to specify a specific
+range of reserved memory, or a ‘size’ property with optional constraints to
+request a dynamically allocated block of memory.</p>
+<p>Following the generic-names recommended practice, node names should reflect the
+purpose of the node (ie. “framebuffer” or “dma-pool”). Unit address (&#64;&lt;address&gt;)
+should be appended to the name if the node is a static allocation.</p>
+<div class="table-wrapper docutils container" id="id22">
+<table class="docutils align-default" id="id22">
+<caption><span class="caption-number">Table 16 </span><span class="caption-text">Node: reserved-memory</span><a class="headerlink" href="#id22" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2653,26 +2660,27 @@ device drivers.</p>
 <tbody>
 <tr class="row-even"><td><p>#address-cells</p></td>
 <td><p>R</p></td>
-<td></td>
-<td></td>
+<td><p>u32</p></td>
+<td><p>Refer to here for generic definition: <a class="reference internal" href="#sp-acsc"><span class="std std-ref">4.1.2.1 #address-cells and #size-cells</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>#size-cells</p></td>
 <td><p>R</p></td>
-<td></td>
-<td></td>
+<td><p>u32</p></td>
+<td><p>Refer to here for generic definition: <a class="reference internal" href="#sp-acsc"><span class="std std-ref">4.1.2.1 #address-cells and #size-cells</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p>ranges</p></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>SD</p></td>
+<td><p>prop-encoded-array
+or empty</p></td>
+<td><p>Refer to here for generic definition: <a class="reference internal" href="#sp-ranges"><span class="std std-ref">4.1.2.3 ranges</span></a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>Child Node:</p>
-<div class="table-wrapper docutils container" id="id22">
-<table class="docutils align-default" id="id22">
-<caption><span class="caption-number">Table 17 </span><span class="caption-text">Node: name&#64;&lt;base_address&gt;</span><a class="headerlink" href="#id22" title="Link to this table">¶</a></caption>
+<div class="table-wrapper docutils container" id="id23">
+<table class="docutils align-default" id="id23">
+<caption><span class="caption-number">Table 17 </span><span class="caption-text">Node: name&#64;&lt;base_address&gt;</span><a class="headerlink" href="#id23" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Property Name</p></th>
 <th class="head"><p>Usage</p></th>
@@ -2697,19 +2705,20 @@ mapping of the region</p></td>
 <tr class="row-even"><td><p>compatible</p></td>
 <td><p>O</p></td>
 <td><p>string list</p></td>
-<td></td>
+<td><p><em>See definition below</em></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Child Nodes for Payload Memory Types:
-One of the example usage is that UEFI Payload will be aware of where pre-installed
-acpi tables or NVS regions are and will adopt them for supporting additional ACPI
-table installation from payload phase. Those boot-code/boot-data regions from
-PlatformInit will be reported to UEFI OS as usable memory without waste. Similarly
-runtime-code/runtime-data may be provided by PlatformInit for supporting UEFI
-runtime services that will be used by UEFI OS. All of the below are optional
-and can be skipped if unsupported by the platform.</p>
+<p><strong>Compatible string list for Child Node:</strong></p>
+<p>This is used to describe memory type for UPL usage. One of the example usage is
+that Payload will be aware of where pre-installed ACPI tables or NVS regions are
+and will adopt them for supporting additional ACPI table installation from
+payload phase. Those boot-code / boot-data regions from Platform Init will be
+reported to OS as usable memory without waste. Similarly, runtime-code /
+runtime-data may be provided by Platform Init for supporting firmware runtime
+services that will be used by OS. All of the below are optional and can be
+skipped if unsupported by the platform.</p>
 <blockquote>
 <div><div class="table-wrapper docutils container">
 <table class="docutils align-default">
@@ -2739,14 +2748,14 @@ ExitBootService signaled).</p></td>
 </tr>
 <tr class="row-even"><td><p>runtime-code</p></td>
 <td><p>Runtime service code memory region which will be used
-by OS runtime service</p></td>
+by OS runtime services.</p></td>
 </tr>
 <tr class="row-odd"><td><p>runtime-data</p></td>
 <td><p>Runtime service data memory region which will be used
-by OS runtime service.</p></td>
+by OS runtime services.</p></td>
 </tr>
 <tr class="row-even"><td><p>smbios</p></td>
-<td><p>If PlatformInit has created a SMBIOS data buffer, this
+<td><p>If Platform Init has created a SMBIOS data buffer, this
 will have the SMBIOS data buffer region information.
 SMBIOS 3.0 or above must be supported by payload.</p></td>
 </tr>
