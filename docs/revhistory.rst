@@ -24,7 +24,7 @@ Revision History
                          * /options/upl-image/image@
                          * pci
                          * isa
-                         * serial console decice
+                         * serial console device
                          * framebuffer
                          * chosen
                          * /options/upl-custom

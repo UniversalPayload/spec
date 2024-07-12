@@ -4,7 +4,8 @@
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS    =
+# '-W': to treat warnings as errors and stop the LaTeX PDF building process when warnings occur
+SPHINXOPTS    = -W
 SPHINXBUILD   = python3 -msphinx
 SOURCEDIR     = docs
 BUILDDIR      = _build
