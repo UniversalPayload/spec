@@ -13,6 +13,7 @@ LATEXDIFF     = latexdiff
 all: latexpdf html
 
 # Put it first so that "make" without argument is like "make help".
+# testing
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	@echo "  latexdiff   to make LaTeX files including changebars against previous release"
