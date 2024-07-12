@@ -1,0 +1,49 @@
+name: GitHub CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+# Cancel any in-progress job or run
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: install
+      run: |
+        sudo apt-get update
+        sudo apt-get install latexmk libalgorithm-diff-perl texlive texlive-latex-extra texlive-humanities graphviz
+        pip3 install --user mako
+        pip3 install --user furo
+        pip3 install --user typing
+        pip3 install --user Sphinx
+        pip3 install --user codespell
+        git fetch --tags --force # Needed to make git-describe work
+
+    - name: build pdf
+      run: |
+        make latexpdf
+        mv _build/latex/upl-specification.pdf _build/latex/upl-specification-$(git describe).pdf
+    - name: build html
+      run: make html
+    - name: build singlehtml
+      run: make singlehtml
+
+    - name: upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifacts
+        path: |
+          _build/latex/upl-specification-*.pdf
