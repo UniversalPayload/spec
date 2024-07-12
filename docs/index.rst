@@ -7,7 +7,7 @@
 
 **Scope**
 
-blabagregje This document defines technical specifications for a Universal Payload to be
+This document defines technical specifications for a Universal Payload to be
 used as a common payload handoff interface in between Platform Init and Payload.
 
 .. toctree::
