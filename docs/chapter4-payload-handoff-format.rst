@@ -149,6 +149,8 @@ Here is a list of example standard properties:
 
 Here are the standard properties that are used for this spec:
 
+.. _sp_acsc:
+
 4.1.2.1 #address-cells and #size-cells
 """"""""""""""""""""""""""""""""""""""""
 
@@ -656,9 +658,9 @@ software pespective, both are ISA compatible.
    ================= =========== =================== ==============================================
    Property Name     Usage       Value Type          Definition
    ================= =========== =================== ==============================================
-   compatible        R           string       "isa"
-   #address-cells    R           u32          2
-   #size-cells       R           u32          1
+   compatible        R           string              "isa"
+   #address-cells    R           u32                 2
+   #size-cells       R           u32                 1
    ranges            SD          prop-encoded-array  Refer to here for generic definition:
                                  or empty            :ref:`sp_ranges`
                                                      
@@ -965,35 +967,45 @@ Example::
 4.2.12 Node: reserved-memory (R)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Both the reserved memory description models, namely simple descriptor (Memory
-Reservation Block) and standard descriptor (reserved memory node) are supported
-to provide information about memory which is not available for use. Payload shall
-exclude reserved memory from normal usage.
+Both the reserved memory description models, namely **simple descriptor (Memory
+Reservation Block)** and **standard descriptor (reserved memory node)** are
+supported to provide information about memory which is not available for use.
+Payload shall exclude reserved memory from normal usage.
 
 If Memory Reservation Block is used, payload is free to chose default attributes
 it wants to assign to this block. What is guaranteed is that this memory will be
-provided to OS as "reserved" memory. No memory optimisations (such as reclaim etc.)
-will be possible. On the other hand, standard reserved memory node will provide
-better control over memory range handling in firmware.
+provided to OS as "reserved" memory. No memory optimisations (such as reclaim
+etc.) will be possible. On the other hand, standard reserved memory node will
+provide better control over memory range handling in firmware.
 
-For further information on Memory Reservation Block, please refer to [DTspec]
+For further information on Memory Reservation Block, please refer to [DTspec]_
 Chapter 5.3.
 
 Here are the table description for standard reserved memory node. One can create
 child nodes describing particular reserved (excluded from normal use) memory
-regions. Such memory regions are usually designed for the special usage by various
-device drivers.
+regions. Such memory regions are usually designed for the special usage by
+various device drivers.
+
+Each child of the reserved-memory node specifies one or more regions of reserved
+memory. Each child node may either use a 'reg' property to specify a specific
+range of reserved memory, or a 'size' property with optional constraints to
+request a dynamically allocated block of memory.
+
+Following the generic-names recommended practice, node names should reflect the
+purpose of the node (ie. "framebuffer" or "dma-pool"). Unit address (@<address>)
+should be appended to the name if the node is a static allocation.
 
 .. tabularcolumns:: | p{3cm} p{0.75cm} p{2cm} p{9.5cm} |
 .. table:: Node: reserved-memory
 
-  ================ =========== ============ =====================================
-   Property Name       Usage     Value Type      Definition
-  ================ =========== ============ =====================================
-   #address-cells       R
-   #size-cells          R
-   ranges
-  ================ =========== ============ =====================================
+  ================ =========== =================== ======================================================
+   Property Name   Usage       Value Type          Definition
+  ================ =========== =================== ======================================================
+   #address-cells  R           u32                 Refer to here for generic definition: :ref:`sp_acsc`
+   #size-cells     R           u32                 Refer to here for generic definition: :ref:`sp_acsc`
+   ranges          SD          prop-encoded-array  Refer to here for generic definition: :ref:`sp_ranges`
+                               or empty
+  ================ =========== =================== ======================================================
 
 Child Node:
 
@@ -1003,22 +1015,24 @@ Child Node:
   =============== ======= =============== =====================================
    Property Name   Usage   Value Type      Definition
   =============== ======= =============== =====================================
-   reg              R      u32 / 64 array  Specify memory region of reserved
-                                           memory
-   no-map           O      boolean         If present, indicates the operating
-                                           system must not create a virtual
-                                           mapping of the region
-   compatible       O      string list
+   reg              R      u32 / 64 array Specify memory region of reserved
+                                          memory
+   no-map           O      boolean        If present, indicates the operating
+                                          system must not create a virtual
+                                          mapping of the region
+   compatible       O      string list    *See definition below*
   =============== ======= =============== =====================================
 
-Child Nodes for Payload Memory Types:
-One of the example usage is that UEFI Payload will be aware of where pre-installed
-acpi tables or NVS regions are and will adopt them for supporting additional ACPI
-table installation from payload phase. Those boot-code/boot-data regions from
-PlatformInit will be reported to UEFI OS as usable memory without waste. Similarly
-runtime-code/runtime-data may be provided by PlatformInit for supporting UEFI
-runtime services that will be used by UEFI OS. All of the below are optional
-and can be skipped if unsupported by the platform. 
+**Compatible string list for Child Node:**
+
+This is used to describe memory type for UPL usage. One of the example usage is
+that Payload will be aware of where pre-installed ACPI tables or NVS regions are
+and will adopt them for supporting additional ACPI table installation from
+payload phase. Those boot-code / boot-data regions from Platform Init will be
+reported to OS as usable memory without waste. Similarly, runtime-code /
+runtime-data may be provided by Platform Init for supporting firmware runtime
+services that will be used by OS. All of the below are optional and can be
+skipped if unsupported by the platform.
 
 
   ================== ======================================================
@@ -1035,10 +1049,10 @@ and can be skipped if unsupported by the platform.
                       finishes (for example with a UEFI payload when
                       ExitBootService signaled).
     runtime-code      Runtime service code memory region which will be used
-                      by OS runtime service
+                      by OS runtime services.
     runtime-data      Runtime service data memory region which will be used
-                      by OS runtime service.
-    smbios            If PlatformInit has created a SMBIOS data buffer, this
+                      by OS runtime services.
+    smbios            If Platform Init has created a SMBIOS data buffer, this
                       will have the SMBIOS data buffer region information.
                       SMBIOS 3.0 or above must be supported by payload.
   ================== ======================================================
