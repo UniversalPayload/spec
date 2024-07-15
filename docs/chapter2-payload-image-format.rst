@@ -346,7 +346,7 @@ included to be used later by the main image after the main image is executed.
     	description = “Uefi Payload”
     	timestamp = <0x00000000>
     	#address-cells = <0x02>;
-    	size = <0x00385000>	
+    	size = <0x00385000>
     	spec-version = <0x00000100>;
     	build-revision = <0x00010105>;
     	images {
@@ -365,8 +365,8 @@ included to be used later by the main image after the main image is executed.
     			load = <0x120000>;
     		};
     		uefi-fv {    // showing how to have multiple images
-    	      description = "UEFI Firmware Volume";
-    	      type = "flat-binary";
+    			description = "UEFI Firmware Volume";
+    			type = "flat-binary";
     			arch = "x86_64";
     			project = "tianocore";
     			compression = "lzma";
@@ -378,11 +378,11 @@ included to be used later by the main image after the main image is executed.
     			type = "flat-binary";
     			arch = "x86_64";
     			project = "tianocore";
-    		compression = "lzma";
-    		data-offset = <...data…>;
-    		data-size = <...data…>;
+    			compression = "lzma";
+    			data-offset = <...data…>;
+    			data-size = <...data…>;
+    		};
     	};
-    };
     	configurations {
     		default = "conf-1";
     		conf-1 {
