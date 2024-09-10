@@ -1052,11 +1052,11 @@ skipped if unsupported by the platform.
                       by OS runtime services.
     runtime-data      Runtime service data memory region which will be used
                       by OS runtime services.
-    soft-reserve      Specific-purpose memory (SPM). The memory is earmarked
-                      for specific purposes such as for specific device
-                      drivers or applications.
+    special-purpose   Specific-purpose memory (e.g.: HBM or CXL). The memory
+                      is earmarked for specific purposes such as for specific
+                      device drivers or applications.
                       
-                      The SPM attribute serves as a hint to the OS to avoid
+                      This attribute serves as a hint to the OS to avoid
                       allocating this memory for core OS data or code that
                       can not be relocated. Prolonged use of this memory for
                       purposes other than the intended purpose may result in
