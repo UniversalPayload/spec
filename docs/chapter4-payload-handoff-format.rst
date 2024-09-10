@@ -1052,6 +1052,15 @@ skipped if unsupported by the platform.
                       by OS runtime services.
     runtime-data      Runtime service data memory region which will be used
                       by OS runtime services.
+    special-purpose   Specific-purpose memory (e.g.: HBM or CXL). The memory
+                      is earmarked for specific purposes such as for specific
+                      device drivers or applications.
+                      
+                      This attribute serves as a hint to the OS to avoid
+                      allocating this memory for core OS data or code that
+                      can not be relocated. Prolonged use of this memory for
+                      purposes other than the intended purpose may result in
+                      suboptimal platform performance.
     smbios            If Platform Init has created a SMBIOS data buffer, this
                       will have the SMBIOS data buffer region information.
                       SMBIOS 3.0 or above must be supported by payload.
