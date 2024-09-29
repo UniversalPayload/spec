@@ -797,6 +797,11 @@ payload (in the case that only a single display output is supported by payload).
    format            R           string             * `a8b8g8r8` - 32-bit pixels, d[31:24]=a, d[23:16]=b, d[15:8]=g, d[7:0]=r
                                                     * `a8r8g8b8` - 32-bit pixels, d[31:24]=a, d[23:16]=r, d[15:8]=g, d[7:0]=b
                                                     * `a16b16g16r16` - 64-bit pixels, d[63:48]=a, d[47:32]=r, d[31:16]=g, d[15:0]=b
+   redmask           R           u32                mask to red color intensity.
+   greenmask         R           u32                mask to green color intensity.
+   bluemask          R           u32                mask to blue color intensity.
+   reservedmask      R           u32                mask to reserved color intensity.
+   pixelsperscanline R           u32                number of pixel elements per video memory line.
    display           R           string             Point to the PCI graphics device which provides this framebuffer as the primary display device.
    ================= =========== ================== ======================================================================================================================================================================
 
