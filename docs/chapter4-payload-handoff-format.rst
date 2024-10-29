@@ -429,7 +429,7 @@ which configuration was chosen. It cannot find this out by itself. The
 'image' node provides information to help with these problems.
 
 .. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
-.. table:: Node: /options/upl-images@<addr>
+.. table:: Node: /options/upl-image@<addr>
 
    ================= =========== ================== ======================================================================================================================================================================
    Property          Usage       Value Type         Definition
