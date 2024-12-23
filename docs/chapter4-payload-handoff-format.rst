@@ -798,6 +798,7 @@ payload (in the case that only a single display output is supported by payload).
                                                     * `a8r8g8b8` - 32-bit pixels, d[31:24]=a, d[23:16]=r, d[15:8]=g, d[7:0]=b
                                                     * `a16b16g16r16` - 64-bit pixels, d[63:48]=a, d[47:32]=r, d[31:16]=g, d[15:0]=b
    display           R           string             Point to the PCI graphics device which provides this framebuffer as the primary display device.
+   pixelsperscanline R           u32                number of pixel elements per video memory line.
    ================= =========== ================== ======================================================================================================================================================================
 
 Example below shows how framebuffer node is generated:
