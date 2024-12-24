@@ -250,7 +250,7 @@ Nodes with properties are shown in the tables below:
    uncomp-size       OR          u32          Size of the uncompressed data in bytes. If
                                               the data is not compressed, this can be
                                               omitted.
-   entry-start       O           u32 / u64    If required, this is the offset of the image
+   entry             O           u32 / u64    If required, this is the absolute address of the image
                                               entry point from the load address of the
                                               image. For example, a value of 0x10 means
                                               that the image entry point is 16 bytes after
@@ -361,7 +361,7 @@ included to be used later by the main image after the main image is executed.
     			data-offset = <...data…>;
     			data-size = <...data…>;
     			reloc-start = <start offset of reloc table within data>;
-    			entry-start = <0x121b10>;
+    			entry = <0x121b10>;
     			load = <0x120000>;
     		};
     		uefi-fv {    // showing how to have multiple images
@@ -454,7 +454,7 @@ Here is an example of Platform Init loading EDK-II Payload:
      Init treats the whole FIT image as a single binary blob (no separate
      binary blob loading needed) and load the full FIT image to suitable
      address following FIT->size and FIT->align requirement. In this case, when
-     Platform Init is calling the entry-offset of tianocore, it passes the
+     Platform Init is calling the entry address of tianocore, it passes the
      handoff FDT to pass the addresses of the binary blobs within the FIT as
      per step 4.
    * Full  loading: Platform Init firstly loads the "tianocore" binary blob
@@ -471,7 +471,7 @@ Here is an example of Platform Init loading EDK-II Payload:
    information. Refer to :ref:`chapter-payload-handoff-format`
    /options/upl-image node for more information.
 #. Platform Init calls the "tianocore" image entry point function (“load” +
-   “entry-start” or “new base address” + “entry-start”), passing the handoff
+   “entry” or “new base address” + “entry”), passing the handoff
    information along.
 #. Tianocore starts executing, locates the firmware volumes and starts up
    normally.
